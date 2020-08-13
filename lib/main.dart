@@ -28,9 +28,29 @@ class ProductList extends StatelessWidget {
           itemBuilder: (context, index) {
             return ListTile(
               title: Text(products[index].title),
-              onTap: () {}, // 点击详情事件
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ProductDetail(product: products[index])));
+              }, // 点击详情事件
             );
           },
         ));
+  }
+}
+
+class ProductDetail extends StatelessWidget {
+  final Product product;
+  ProductDetail({Key key, @required this.product}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('${product.title}'),
+        ),
+        body: Center(child: Text('${product.description}')));
   }
 }
