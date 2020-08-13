@@ -1,56 +1,45 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MaterialApp(
+    title: "导航演示01",
+    home: new FirstScreen(),
+  ));
+}
 
-class MyApp extends StatelessWidget {
+class FirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var card = new Card(
-      child: Column(
-        children: <Widget>[
-          ListTile(
-            title: Text(
-                "Flutter 是 Google 开源的 UI 工具包，帮助开发者通过一套代码库高效构建多平台精美应用，支持移动、Web、桌面和嵌入式平台。",
-                style: TextStyle(fontWeight: FontWeight.w500)),
-            subtitle: Text('好好学习，争取早日做出自己的产品'),
-            leading: new Icon(
-              Icons.flight,
-              color: Colors.lightBlue,
-            ),
-          ),
-          new Divider(),
-          ListTile(
-            title: Text(
-                "Flutter 是 Google 开源的 UI 工具包，帮助开发者通过一套代码库高效构建多平台精美应用，支持移动、Web、桌面和嵌入式平台。",
-                style: TextStyle(fontWeight: FontWeight.w500)),
-            subtitle: Text('好好学习，争取早日做出自己的产品'),
-            leading: new Icon(
-              Icons.flight,
-              color: Colors.lightBlue,
-            ),
-          ),
-          new Divider(),
-          ListTile(
-            title: Text(
-                "Flutter 是 Google 开源的 UI 工具包，帮助开发者通过一套代码库高效构建多平台精美应用，支持移动、Web、桌面和嵌入式平台。",
-                style: TextStyle(fontWeight: FontWeight.w500)),
-            subtitle: Text('好好学习，争取早日做出自己的产品'),
-            leading: new Icon(
-              Icons.flight,
-              color: Colors.lightBlue,
-            ),
-          ),
-        ],
-      ),
-    );
-    return MaterialApp(
-      title: 'Row Widget Demo',
-      home: Scaffold(
-        appBar: new AppBar(title: new Text("垂直方向布局")),
-        body: Center(
-          child: card,
+    return Scaffold(
+      appBar: AppBar(title: Text("导航页面")),
+      body: Center(
+        child: RaisedButton(
+          // 按钮组件
+          child: Text('查看商品详情页'),
+          onPressed: () {
+            // 按下动作的响应事件
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => new SecondScreen()));
+          },
         ),
       ),
     );
+  }
+}
+
+// 子页面
+class SecondScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(title: Text('商品详情页')),
+        body: Center(
+          child: RaisedButton(
+            child: Text('返回'),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ));
   }
 }
