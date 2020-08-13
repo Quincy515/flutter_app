@@ -8,22 +8,44 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Flutter Demo",
       home: Scaffold(
-        // 脚手架组件
-        appBar: new AppBar(title: new Text("ListView Widget")),
-        body: GridView.count(
-          padding: const EdgeInsets.all(20.0),
-          crossAxisSpacing: 10.0,
-          crossAxisCount: 3,
-          children: <Widget>[
-            const Text("I am Custer"),
-            const Text("I love Go"),
-            const Text("做个产品"),
-            const Text("爱猫人士"),
-            const Text("技术菜"),
-            const Text("笨，学不会"),
-          ],
-        ),
-      ),
+          // 脚手架组件
+          appBar: new AppBar(title: new Text("ListView Widget")),
+          body: GridView(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3, // 列数
+                mainAxisSpacing: 2.0, // 纵轴距离
+                crossAxisSpacing: 2.0, // 横轴间距
+                childAspectRatio: 0.7),
+            children: <Widget>[
+              new Image.network(
+                  'http://img5.mtime.cn/mt/2018/10/22/104316.77318635_180X260X4.jpg',
+                  fit: BoxFit.cover),
+              new Image.network(
+                  'http://img5.mtime.cn/mt/2018/10/10/112514.30587089_180X260X4.jpg',
+                  fit: BoxFit.cover),
+              new Image.network(
+                  'http://img5.mtime.cn/mt/2018/11/13/093605.61422332_180X260X4.jpg',
+                  fit: BoxFit.cover),
+              new Image.network(
+                  'http://img5.mtime.cn/mt/2018/11/07/092515.55805319_180X260X4.jpg',
+                  fit: BoxFit.cover),
+              new Image.network(
+                  'http://img5.mtime.cn/mt/2018/11/21/090246.16772408_135X190X4.jpg',
+                  fit: BoxFit.cover),
+              new Image.network(
+                  'http://img5.mtime.cn/mt/2018/11/17/162028.94879602_135X190X4.jpg',
+                  fit: BoxFit.cover),
+              new Image.network(
+                  'http://img5.mtime.cn/mt/2018/11/19/165350.52237320_135X190X4.jpg',
+                  fit: BoxFit.cover),
+              new Image.network(
+                  'http://img5.mtime.cn/mt/2018/11/16/115256.24365160_180X260X4.jpg',
+                  fit: BoxFit.cover),
+              new Image.network(
+                  'http://img5.mtime.cn/mt/2018/11/20/141608.71613590_135X190X4.jpg',
+                  fit: BoxFit.cover),
+            ],
+          )),
     );
   }
 }
