@@ -13,15 +13,16 @@ class MyApp extends StatelessWidget {
               'https://avatars0.githubusercontent.com/u/7986197?s=460&u=e84e0aa9a4ff4708964ecf365626e6f5a5895b4f&v=4'),
           radius: 100.0,
         ),
-        new Container(
-          // 容器
-          decoration: new BoxDecoration(
-            // 修饰器
-            color: Colors.lightBlue,
-          ),
-          padding: EdgeInsets.all(5.0),
-          child: Text('Custer 学习 flutter'),
-        )
+        new Positioned(
+          top: 10.0,
+          left: 60.0,
+          child: new Text('Custer 学习 '),
+        ),
+        new Positioned(
+          bottom: 10.0,
+          right: 10.0,
+          child: new Text('flutter'),
+        ),
       ],
     );
     return MaterialApp(
