@@ -1,45 +1,36 @@
 import 'package:flutter/material.dart';
 
+class Product {
+  // 商品抽象
+  final String title; // 商品标题
+  final String description; // 商品描述
+  Product(this.title, this.description); // 构造函数
+}
+
 void main() {
   runApp(MaterialApp(
-    title: "导航演示01",
-    home: new FirstScreen(),
-  ));
+      title: '导航的数据传递和接收',
+      home: ProductList(
+          products: List.generate(
+              20, (index) => Product('商品 $index', '这是一个商品详情，编号为: $index')))));
 }
 
-class FirstScreen extends StatelessWidget {
+class ProductList extends StatelessWidget {
+  final List<Product> products; // 参数接收
+  ProductList({Key key, @required this.products}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("导航页面")),
-      body: Center(
-        child: RaisedButton(
-          // 按钮组件
-          child: Text('查看商品详情页'),
-          onPressed: () {
-            // 按下动作的响应事件
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => new SecondScreen()));
+        appBar: AppBar(title: Text('商品列表')),
+        body: ListView.builder(
+          itemCount: products.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(products[index].title),
+              onTap: () {}, // 点击详情事件
+            );
           },
-        ),
-      ),
-    );
-  }
-}
-
-// 子页面
-class SecondScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: Text('商品详情页')),
-        body: Center(
-          child: RaisedButton(
-            child: Text('返回'),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
         ));
   }
 }
