@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages.dart';
+import 'forsted_glass_demo.dart';
 
 void main() => runApp(MyApp());
 
@@ -7,10 +7,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: new ThemeData(
+        title: 'Flutter Demo of custer',
+        theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: FirstPage());
+        home: Scaffold(
+          body: FrostedClassDemo(),
+        ));
   }
 }
