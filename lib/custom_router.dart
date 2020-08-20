@@ -21,10 +21,21 @@ class CustomRoute extends PageRouteBuilder {
               // );
 
               // 缩放的动画效果
-              return ScaleTransition(
-                scale: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+              // return ScaleTransition(
+              //   scale: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+              //       parent: animation1, curve: Curves.fastOutSlowIn)),
+              //   child: child,
+              // );
+
+              // 旋转+缩放动画效果
+              return RotationTransition(
+                turns: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
                     parent: animation1, curve: Curves.fastOutSlowIn)),
-                child: child,
+                child: ScaleTransition(
+                  scale: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+                      parent: animation1, curve: Curves.fastOutSlowIn)),
+                  child: child,
+                ),
               );
             });
 }
