@@ -13,8 +13,16 @@ class CustomRoute extends PageRouteBuilder {
                 Animation<double> animation1,
                 Animation<double> animation2,
                 Widget child) {
-              return FadeTransition(
-                opacity: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+              // 渐进渐出动画效果
+              // return FadeTransition(
+              //   opacity: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+              //       parent: animation1, curve: Curves.fastOutSlowIn)),
+              //   child: child,
+              // );
+
+              // 缩放的动画效果
+              return ScaleTransition(
+                scale: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
                     parent: animation1, curve: Curves.fastOutSlowIn)),
                 child: child,
               );
