@@ -2,6 +2,18 @@
 
 A new Flutter application.
 
+| 插件                                                         | 简要                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [flutter_swiper](https://github.com/best-flutter/flutter_swiper) | flutter最强大的siwiper, 多种布局方式，无限轮播，Android和IOS双端适配. |
+| [flutter_ScreenUtil](https://github.com/OpenFlutter/flutter_screenutil) | flutter 屏幕适配方案，让你的UI在不同尺寸的屏幕上都能显示合理的布局! |
+|                                                              |                                                              |
+
+学习参考项目
+
+| 自学Flutter仿写的商城APP                     |
+| -------------------------------------------- |
+| https://github.com/xiaoliudeHub/Flutter_shop |
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
