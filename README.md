@@ -6,7 +6,7 @@ A new Flutter application.
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [flutter_swiper](https://github.com/best-flutter/flutter_swiper) | flutter最强大的siwiper, 多种布局方式，无限轮播，Android和IOS双端适配. |
 | [flutter_ScreenUtil](https://github.com/OpenFlutter/flutter_screenutil) | flutter 屏幕适配方案，让你的UI在不同尺寸的屏幕上都能显示合理的布局! |
-|                                                              |                                                              |
+| [url_launcher](https://github.com/flutter/plugins/tree/master/packages/url_launcher) | 用于在移动平台中启动URL的Flutter插件，适用于IOS和Android平台。他可以打开网页，发送邮件，还可以拨打电话 |
 
 学习参考项目
 
