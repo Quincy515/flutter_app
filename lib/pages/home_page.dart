@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    var formData = {'lon': '115.02932', 'lat': '35.76189'};
     return Container(
       child: Scaffold(
         appBar: AppBar(
@@ -35,7 +36,8 @@ class _HomePageState extends State<HomePage>
         ),
         body: FutureBuilder(
           // 渲染异步请求的组件
-          future: getHomePageContent(), // 异步方法
+          future: request('homePageContent', formData), // 异步方法
+//          future: getHomePageContent(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               var data = json.decode(snapshot.data.toString());
@@ -361,7 +363,8 @@ class _HotGoodsState extends State<HotGoods> {
   @override
   void initState() {
     super.initState();
-    getHomePageBelowContent().then((val) {
+    request('homePageBelowContent', 1).then((val) {
+//    getHomePageBelowContent().then((val) {
       print(val);
     });
   }
