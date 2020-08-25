@@ -8,6 +8,8 @@ A new Flutter application.
 | [flutter_ScreenUtil](https://github.com/OpenFlutter/flutter_screenutil) | flutter 屏幕适配方案，让你的UI在不同尺寸的屏幕上都能显示合理的布局! |
 | [url_launcher](https://github.com/flutter/plugins/tree/master/packages/url_launcher) | 用于在移动平台中启动URL的Flutter插件，适用于IOS和Android平台。他可以打开网页，发送邮件，还可以拨打电话 |
 | [flutter_easyrefresh](https://github.com/xuelongqy/flutter_easyrefresh) | EasyRefresh很容易就能在Flutter应用上实现下拉刷新以及上拉加载操作，它支持几乎所有的Flutter控件。 |
+| [json_to_dart](https://javiercbk.github.io/json_to_dart/)    | 它可以直接把json转换成dart类，然后进行一定的修改，就可以使用了。 |
+|                                                              |                                                              |
 |                                                              |                                                              |
 
 学习参考项目
