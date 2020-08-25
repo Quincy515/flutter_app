@@ -9,8 +9,8 @@ A new Flutter application.
 | [url_launcher](https://github.com/flutter/plugins/tree/master/packages/url_launcher) | 用于在移动平台中启动URL的Flutter插件，适用于IOS和Android平台。他可以打开网页，发送邮件，还可以拨打电话 |
 | [flutter_easyrefresh](https://github.com/xuelongqy/flutter_easyrefresh) | EasyRefresh很容易就能在Flutter应用上实现下拉刷新以及上拉加载操作，它支持几乎所有的Flutter控件。 |
 | [json_to_dart](https://javiercbk.github.io/json_to_dart/)    | 它可以直接把json转换成dart类，然后进行一定的修改，就可以使用了。 |
-|                                                              |                                                              |
-|                                                              |                                                              |
+| [boc](https://github.com/felangel/bloc)                      | A predictable state management library that helps implement the BLoC design pattern |
+| [provider](https://github.com/rrousselGit/provider)          | 用于提供数据，无论是在**单个页面**还是在**整个** app 都有它自己的解决方案，我们可以很方便的管理状态。https://juejin.im/post/6844903864852807694 |
 
 学习参考项目
 
