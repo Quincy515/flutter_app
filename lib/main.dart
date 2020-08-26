@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import './provider/category_goods_list.dart';
 import './provider/child_category.dart';
 import './provider/counter.dart';
+import './provider/details_info.dart';
 import './routers/application.dart';
 import './routers/routes.dart';
 import 'pages/index_page.dart';
@@ -19,6 +20,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => Counter()),
         ChangeNotifierProvider(create: (_) => ChildCategory()),
         ChangeNotifierProvider(create: (_) => CategoryGoodsListProvide()),
+        ChangeNotifierProvider(create: (_) => DetailsInfoProvide()),
       ],
       child: MyApp(),
     ),
