@@ -19,7 +19,9 @@ class _CategoryPageState extends State<CategoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('商品分类'),),
+      appBar: AppBar(
+        title: Text('商品分类'),
+      ),
       body: Container(
         child: Row(
           children: <Widget>[
@@ -181,7 +183,6 @@ class CategoryGoodsList extends StatefulWidget {
 }
 
 class _CategoryGoodsListState extends State<CategoryGoodsList> {
-
   @override
   void initState() {
     super.initState();
@@ -189,19 +190,20 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
 
   @override
   Widget build(BuildContext context) {
-    final goodsList = context.select((CategoryGoodsListProvide p) => p.goodsList);
-    return Container(
-      width: ScreenUtil().setWidth(570),
-      height: ScreenUtil().setHeight(1000.0),
-      child: ListView.builder(
-          itemCount: goodsList.length,
-          itemBuilder: (context, index) {
-            return _listItemWidget(goodsList, index);
-          }),
+    final goodsList =
+        context.select((CategoryGoodsListProvide p) => p.goodsList);
+    return Expanded(
+      // 有伸缩能力的组件继承于 Flexible
+      child: Container(
+        width: ScreenUtil().setWidth(570), // 去掉 height 使用 Expanded 解决高度溢出
+        child: ListView.builder(
+            itemCount: goodsList.length,
+            itemBuilder: (context, index) {
+              return _listItemWidget(goodsList, index);
+            }),
+      ),
     );
   }
-
-
 
   // 商品图片小控件
   Widget _goodsImage(List newList, index) {
@@ -234,7 +236,7 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
           Text(
             '价格：￥${newList[index].presentPrice}',
             style:
-            TextStyle(color: Colors.pink, fontSize: ScreenUtil().setSp(30)),
+                TextStyle(color: Colors.pink, fontSize: ScreenUtil().setSp(30)),
           ),
           Text(
             '￥${newList[index].oriPrice}',
