@@ -170,8 +170,8 @@ class _RightCategoryNavState extends State<RightCategoryNav> {
         (index == context.read<ChildCategory>().childIndex) ? true : false;
     return InkWell(
       onTap: () {
-        context.read<ChildCategory>().changeChildIndex(index); // 改变状态高亮显示
-        _getGoodsList(item.mallSubId);
+        context.read<ChildCategory>().changeChildIndex(index, item.mallSubId);
+        _getGoodsList(item.mallSubId); // 改变状态高亮显示,并传递子类ID
       },
       child: Container(
         padding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
@@ -198,9 +198,11 @@ class _RightCategoryNavState extends State<RightCategoryNav> {
     await request('getMallGoods', formData: data).then((value) {
       var data = json.decode(value.toString()); // 从字符串或 map 转换成 model 类
       CategoryGoodsListModel goodsList = CategoryGoodsListModel.fromJson(data);
-      context
-          .read<CategoryGoodsListProvide>()
-          .getGoodsList(goodsList.data); // 改变列表状态
+      if (goodsList.data == null) {
+        context.read<CategoryGoodsListProvide>().getGoodsList([]); // 改变列表状态
+      } else {
+        context.read<CategoryGoodsListProvide>().getGoodsList(goodsList.data);
+      }
     });
   }
 }
@@ -220,18 +222,22 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
   @override
   Widget build(BuildContext context) {
     final goodsList =
-        context.select((CategoryGoodsListProvide p) => p.goodsList);
-    return Expanded(
-      // 有伸缩能力的组件继承于 Flexible
-      child: Container(
-        width: ScreenUtil().setWidth(570), // 去掉 height 使用 Expanded 解决高度溢出
-        child: ListView.builder(
-            itemCount: goodsList.length,
-            itemBuilder: (context, index) {
-              return _listItemWidget(goodsList, index);
-            }),
-      ),
-    );
+    context.select((CategoryGoodsListProvide p) => p.goodsList);
+    if (goodsList.length > 0) {
+      return Expanded(
+        // 有伸缩能力的组件继承于 Flexible
+        child: Container(
+          width: ScreenUtil().setWidth(570), // 去掉 height 使用 Expanded 解决高度溢出
+          child: ListView.builder(
+              itemCount: goodsList.length,
+              itemBuilder: (context, index) {
+                return _listItemWidget(goodsList, index);
+              }),
+        ),
+      );
+    } else {
+      return Text('暂时没有数据');
+    }
   }
 
   // 商品图片小控件
