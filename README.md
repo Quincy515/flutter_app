@@ -12,13 +12,14 @@ A new Flutter application.
 | [boc](https://github.com/felangel/bloc)                      | A predictable state management library that helps implement the BLoC design pattern |
 | [provider](https://github.com/rrousselGit/provider)          | 用于提供数据，无论是在**单个页面**还是在**整个** app 都有它自己的解决方案，我们可以很方便的管理状态。https://juejin.im/post/6844903864852807694 |
 | [FlutterToast](https://github.com/ponnamkarthik/FlutterToast) | toast 轻提示插件                                             |
-|                                                              |                                                              |
+| [fluro](https://github.com/theyakka/fluro)                   | fluro简化了Flutter的路由开发，也是目前Flutter生态中最成熟的路由框架。 |
 
 学习参考项目
 
 | 自学Flutter仿写的商城APP                     |
 | -------------------------------------------- |
 | https://github.com/xiaoliudeHub/Flutter_shop |
+| https://github.com/shenghy/flutter_shop |
 
 ## Getting Started
 
