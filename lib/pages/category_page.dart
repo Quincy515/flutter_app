@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
@@ -214,6 +215,8 @@ class CategoryGoodsList extends StatefulWidget {
 }
 
 class _CategoryGoodsListState extends State<CategoryGoodsList> {
+  var scrollController = new ScrollController(); // ListView 的控制器
+
   @override
   void initState() {
     super.initState();
@@ -222,22 +225,72 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
   @override
   Widget build(BuildContext context) {
     final goodsList =
-    context.select((CategoryGoodsListProvide p) => p.goodsList);
+        context.select((CategoryGoodsListProvide p) => p.goodsList);
+    try {
+      if (context.watch<ChildCategory>().page == 1) {
+        // 列表位置回到顶部
+        if (scrollController.positions.isNotEmpty) {
+          scrollController.jumpTo(0.0);
+        }
+      }
+    } catch (e) {
+      print('第一次进入页面初始化${e}');
+    }
     if (goodsList.length > 0) {
       return Expanded(
         // 有伸缩能力的组件继承于 Flexible
         child: Container(
           width: ScreenUtil().setWidth(570), // 去掉 height 使用 Expanded 解决高度溢出
-          child: ListView.builder(
-              itemCount: goodsList.length,
-              itemBuilder: (context, index) {
-                return _listItemWidget(goodsList, index);
-              }),
+          child: EasyRefresh(
+            footer: ClassicalFooter(
+              bgColor: Colors.white,
+              textColor: Colors.pink,
+              noMoreText: context.watch<ChildCategory>().noMoreText,
+              loadedText: '上拉加载',
+              loadingText: '加载中...',
+            ),
+            child: ListView.builder(
+                controller: scrollController, // 控制器
+                itemCount: context.watch<CategoryGoodsListProvide>().goodsList.length,
+                itemBuilder: (context, index) {
+                  return _listItemWidget(context.watch<CategoryGoodsListProvide>().goodsList, index);
+                }),
+            onRefresh: () async {
+              _getMoreList(false);
+            },
+            onLoad: () async {
+              _getMoreList(true);
+            },
+          ),
         ),
       );
     } else {
       return Text('暂时没有数据');
     }
+  }
+
+  // 下拉加载获得更多
+  void _getMoreList(bool isLoadMore) async {
+    if (isLoadMore) {
+      context.read<ChildCategory>().addPage();
+    }
+    var data = {
+      'categoryId': context.read<ChildCategory>().categoryId, // 大类ID
+      'categorySubId': context.read<ChildCategory>().subId,
+      'page': isLoadMore ? context.read<ChildCategory>().page : 1,
+    };
+
+    await request('getMallGoods', formData: data).then((value) {
+      var data = json.decode(value.toString()); // 从字符串或 map 转换成 model 类
+      CategoryGoodsListModel goodsList = CategoryGoodsListModel.fromJson(data);
+      if (goodsList.data == null) {
+        context.read<ChildCategory>().changeNoMore('没有更多了'); // 改变列表状态
+      } else {
+        context
+            .read<CategoryGoodsListProvide>()
+            .getMoreGoodsList(goodsList.data);
+      }
+    });
   }
 
   // 商品图片小控件
@@ -271,7 +324,7 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
           Text(
             '价格：￥${newList[index].presentPrice}',
             style:
-                TextStyle(color: Colors.pink, fontSize: ScreenUtil().setSp(30)),
+            TextStyle(color: Colors.pink, fontSize: ScreenUtil().setSp(30)),
           ),
           Text(
             '￥${newList[index].oriPrice}',
