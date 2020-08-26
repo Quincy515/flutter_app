@@ -11,6 +11,8 @@ A new Flutter application.
 | [json_to_dart](https://javiercbk.github.io/json_to_dart/)    | 它可以直接把json转换成dart类，然后进行一定的修改，就可以使用了。 |
 | [boc](https://github.com/felangel/bloc)                      | A predictable state management library that helps implement the BLoC design pattern |
 | [provider](https://github.com/rrousselGit/provider)          | 用于提供数据，无论是在**单个页面**还是在**整个** app 都有它自己的解决方案，我们可以很方便的管理状态。https://juejin.im/post/6844903864852807694 |
+| [FlutterToast](https://github.com/ponnamkarthik/FlutterToast) | toast 轻提示插件                                             |
+|                                                              |                                                              |
 
 学习参考项目
 
