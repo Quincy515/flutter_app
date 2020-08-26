@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
+import 'package:flutter/material.dart';
+
 import '../pages/details_page.dart';
 
 // Handler 控制器或操作器

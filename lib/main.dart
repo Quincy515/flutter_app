@@ -1,10 +1,12 @@
+import 'package:fluro/fluro.dart' as fluro;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:fluro/fluro.dart';
 
 import './provider/category_goods_list.dart';
 import './provider/child_category.dart';
 import './provider/counter.dart';
+import './routers/application.dart';
+import './routers/routes.dart';
 import 'pages/index_page.dart';
 
 void main() {
@@ -26,7 +28,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final router = Router();
+    final router = fluro.Router();
     Routes.configureRoutes(router);
     Application.router = router;
     return Container(
