@@ -155,21 +155,28 @@ class _RightCategoryNavState extends State<RightCategoryNav> {
         itemCount: context.watch<ChildCategory>().childCategoryList.length,
         itemBuilder: (context, index) {
           return _rightInkWell(
-              context.watch<ChildCategory>().childCategoryList[index]);
+              index, context.watch<ChildCategory>().childCategoryList[index]);
         },
       ),
     );
   }
 
   // 先写小的布局还是大的布局都可以
-  Widget _rightInkWell(BxMallSubDto item) {
+  Widget _rightInkWell(int index, BxMallSubDto item) {
+    bool isClick = false; // 是否已经点击
+    isClick =
+        (index == context.read<ChildCategory>().childIndex) ? true : false;
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        context.read<ChildCategory>().changeChildIndex(index);
+      },
       child: Container(
         padding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
         child: Text(
           item.mallSubName,
-          style: TextStyle(fontSize: ScreenUtil().setSp(26)),
+          style: TextStyle(
+              color: isClick ? Colors.pink : Colors.black,
+              fontSize: ScreenUtil().setSp(26)),
         ),
       ),
     );
