@@ -5,9 +5,13 @@ import '../model/category.dart';
 class ChildCategory with ChangeNotifier {
   List<BxMallSubDto> childCategoryList = [];
   int childIndex = 0; // 子类高亮索引
+  String categoryId = '4'; // 大类ID默认设置为白酒
 
-  getChildCategory(List<BxMallSubDto> list) {
+  // 大类切换逻辑
+  getChildCategory(List<BxMallSubDto> list, String id) {
     childIndex = 0; // 点击大类的时候子类索引归零
+    categoryId = id; // 切换大类ID
+
     BxMallSubDto all = BxMallSubDto();
     all.mallSubId = '00';
     all.mallCategoryId = '00';

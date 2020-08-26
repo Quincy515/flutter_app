@@ -81,8 +81,8 @@ class _LeftCategoryNavState extends State<LeftCategoryNav> {
         });
         var childList = list[index].bxMallSubDto; // 获取点击该一级分类得到对应的二级分类
         var categoryId = list[index].mallCategoryId;
-        context.read<ChildCategory>().getChildCategory(
-            childList); // 调用状态管理的getChildCategory方法更新状态childCategoryList
+        context.read<ChildCategory>().getChildCategory(childList,
+            categoryId); // 调用状态管理的getChildCategory方法更新状态childCategoryList
         _getGoodsList(categoryId: categoryId);
       },
       child: Container(
@@ -111,15 +111,17 @@ class _LeftCategoryNavState extends State<LeftCategoryNav> {
       setState(() {
         list = category.data;
       });
-      context.read<ChildCategory>().getChildCategory(list[0].bxMallSubDto);
+      context
+          .read<ChildCategory>()
+          .getChildCategory(list[0].bxMallSubDto, list[0].mallCategoryId);
     });
   }
 
-  // 可选的分类 id
+  // 切换大类 可选的分类 id
   void _getGoodsList({String categoryId}) async {
     var data = {
       'categoryId': categoryId == null ? '4' : categoryId, // 大类ID
-      'CategorySubId': "",
+      'categorySubId': "",
       'page': 1,
     };
 
@@ -168,7 +170,8 @@ class _RightCategoryNavState extends State<RightCategoryNav> {
         (index == context.read<ChildCategory>().childIndex) ? true : false;
     return InkWell(
       onTap: () {
-        context.read<ChildCategory>().changeChildIndex(index);
+        context.read<ChildCategory>().changeChildIndex(index); // 改变状态高亮显示
+        _getGoodsList(item.mallSubId);
       },
       child: Container(
         padding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
@@ -180,6 +183,25 @@ class _RightCategoryNavState extends State<RightCategoryNav> {
         ),
       ),
     );
+  }
+
+  // 切换小类 必选的分类 id
+  void _getGoodsList(String categorySubId) async {
+    var data = {
+      'categoryId': context
+          .read<ChildCategory>()
+          .categoryId, // 大类ID
+      'categorySubId': categorySubId,
+      'page': 1,
+    };
+
+    await request('getMallGoods', formData: data).then((value) {
+      var data = json.decode(value.toString()); // 从字符串或 map 转换成 model 类
+      CategoryGoodsListModel goodsList = CategoryGoodsListModel.fromJson(data);
+      context
+          .read<CategoryGoodsListProvide>()
+          .getGoodsList(goodsList.data); // 改变列表状态
+    });
   }
 }
 
