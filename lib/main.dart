@@ -26,6 +26,9 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final router = Router();
+    Routes.configureRoutes(router);
+    Application.router = router;
     return Container(
       child: MaterialApp(
         title: '百姓生活+',
