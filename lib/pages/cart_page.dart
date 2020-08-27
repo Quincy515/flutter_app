@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/provider/cart.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_app/pages/cart_page/cart_item.dart';
 
 class CartPage extends StatelessWidget {
   @override
@@ -17,9 +18,7 @@ class CartPage extends StatelessWidget {
             return ListView.builder(
                 itemCount: cartList.length,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(cartList[index].goodsName),
-                  );
+                  return CartItem(cartList[index]);
                 });
           } else {
             return CircularProgressIndicator();
