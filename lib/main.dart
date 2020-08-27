@@ -1,26 +1,24 @@
 import 'package:fluro/fluro.dart' as fluro;
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/index_page.dart';
+import 'package:flutter_app/provider/cart.dart';
+import 'package:flutter_app/provider/category_goods_list.dart';
+import 'package:flutter_app/provider/child_category.dart';
+import 'package:flutter_app/provider/counter.dart';
+import 'package:flutter_app/provider/details_info.dart';
+import 'package:flutter_app/routers/application.dart';
+import 'package:flutter_app/routers/routes.dart';
 import 'package:provider/provider.dart';
 
-import './provider/category_goods_list.dart';
-import './provider/child_category.dart';
-import './provider/counter.dart';
-import './provider/details_info.dart';
-import './routers/application.dart';
-import './routers/routes.dart';
-import 'pages/index_page.dart';
-
 void main() {
-//  runApp(MyApp());
   runApp(
-    /// Providers are above [MyApp] instead of inside it, so that tests
-    /// can use [MyApp] while mocking the providers
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => Counter()),
         ChangeNotifierProvider(create: (_) => ChildCategory()),
         ChangeNotifierProvider(create: (_) => CategoryGoodsListProvide()),
         ChangeNotifierProvider(create: (_) => DetailsInfoProvide()),
+        ChangeNotifierProvider(create: (_) => CartProvider()),
       ],
       child: MyApp(),
     ),
