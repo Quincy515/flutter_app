@@ -14,7 +14,7 @@ A new Flutter application.
 | [FlutterToast](https://github.com/ponnamkarthik/FlutterToast) | toast 轻提示插件                                             |
 | [fluro](https://github.com/theyakka/fluro)                   | fluro简化了Flutter的路由开发，也是目前Flutter生态中最成熟的路由框架。 |
 | [flutter_webview_plugin](https://github.com/fluttercommunity/flutter_webview_plugin) |                                                              |
-| [flutter_html](https://github.com/Sub6Resources/flutter_html) | `flutter_html`是一个可以解析静态html标签的Flutter Widget，现在支持超过70种不同的标签。 |
+| [flutter_html](https://github.com/Sub6Resources/flutter_html) | `flutter_html`是一个可以解析静态html标签的Flutter Widget，现在支持超过70种不同的标签。不支持video和iframe |
 
 学习参考项目
 

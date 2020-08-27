@@ -35,7 +35,7 @@ dependencies:
   provider: ^4.3.2+1 # 状态管理替代 google/flutter-provide
   fluttertoast: ^7.0.2 # toast 轻提示插件
   fluro: ^1.6.3 # 路由插件
-  flutter_html: ^1.0.2 # html插件支持超过70种不同的标签
+  flutter_html: ^1.0.2 # html插件不支持video和iframe
 
 dev_dependencies:
   flutter_test:
