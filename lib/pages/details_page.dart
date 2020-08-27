@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/details_page/details_top_area.dart';
 import 'package:flutter_app/provider/details_info.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +27,9 @@ class DetailsPage extends StatelessWidget {
           if (snapshot.hasData) {
             return Container(
               child: Column(
-                children: <Widget>[Text('商品ID: ${goodsId}')],
+                children: <Widget>[
+                  DetailsTopArea(),
+                ],
               ),
             );
           } else {
