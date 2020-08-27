@@ -24,9 +24,9 @@ class DetailsInfoProvide with ChangeNotifier {
   }
 
   // 从后台获取商品详情数据
-  getGoodsInfo(String id) {
+  getGoodsInfo(String id) async {
     var formData = {'goodId': id}; // 构造 Map 类型变量
-    request('getGoodDetailById', formData: formData).then((value) {
+    await request('getGoodDetailById', formData: formData).then((value) {
       var responseData = json.decode(value.toString()); // 从后台获得的数据 decode 防止报错
       print(responseData);
       goodsInfo = DetailsModel.fromJson(responseData); // 把数据从 json 转换成 Model 对象

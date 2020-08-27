@@ -8,7 +8,7 @@ class DetailsTopArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var goodsInfo =
-        context.select((DetailsInfoProvide p) => p.goodsInfo?.data?.goodInfo);
+        context.select((DetailsInfoProvide p) => p.goodsInfo.data.goodInfo);
     if (goodsInfo != null) {
       return Container(
         color: Colors.white,
