@@ -8,6 +8,21 @@ import '../service/service_method.dart';
 class DetailsInfoProvide with ChangeNotifier {
   DetailsModel goodsInfo = null; // 商品详情变量
 
+  bool isLeft = true;
+  bool isRight = false;
+
+  // 自定义 tabbar 的切换方法
+  changeLeftAndRight(String changeState) {
+    if (changeState == 'left') {
+      isLeft = true;
+      isRight = false;
+    } else {
+      isLeft = false;
+      isRight = true;
+    }
+    notifyListeners();
+  }
+
   // 从后台获取商品详情数据
   getGoodsInfo(String id) {
     var formData = {'goodId': id}; // 构造 Map 类型变量
