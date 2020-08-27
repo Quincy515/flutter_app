@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/cart_page/cart_bottom.dart';
+import 'package:flutter_app/pages/cart_page/cart_item.dart';
 import 'package:flutter_app/provider/cart.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_app/pages/cart_page/cart_item.dart';
 
 class CartPage extends StatelessWidget {
   @override
@@ -15,11 +16,20 @@ class CartPage extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List cartList = Provider.of<CartProvider>(context).cartList;
-            return ListView.builder(
-                itemCount: cartList.length,
-                itemBuilder: (context, index) {
-                  return CartItem(cartList[index]);
-                });
+            return Stack(
+              children: <Widget>[
+                ListView.builder(
+                    itemCount: cartList.length,
+                    itemBuilder: (context, index) {
+                      return CartItem(cartList[index]);
+                    }),
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  child: CartBottom(),
+                )
+              ],
+            );
           } else {
             return CircularProgressIndicator();
           }
