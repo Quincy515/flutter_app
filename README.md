@@ -21,6 +21,13 @@ A new Flutter application.
 | https://github.com/xiaoliudeHub/Flutter_shop |
 | https://github.com/shenghy/flutter_shop |
 
+学习文章搜集
+
+| 文章                                        |
+| -------------------------------------------- |
+| [官方文档-简单的应用状态管理](https://book.flutterchina.club/chapter7/provider.html) |
+| [7.3 跨组件状态共享（Provider）](https://book.flutterchina.club/chapter7/provider.html) |
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
