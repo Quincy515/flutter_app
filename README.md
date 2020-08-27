@@ -15,6 +15,8 @@ A new Flutter application.
 | [fluro](https://github.com/theyakka/fluro)                   | fluro简化了Flutter的路由开发，也是目前Flutter生态中最成熟的路由框架。 |
 | [flutter_webview_plugin](https://github.com/fluttercommunity/flutter_webview_plugin) |                                                              |
 | [flutter_html](https://github.com/Sub6Resources/flutter_html) | `flutter_html`是一个可以解析静态html标签的Flutter Widget，现在支持超过70种不同的标签。不支持video和iframe |
+| [shared_preferences](https://github.com/flutter/plugins/tree/master/packages/shared_preferences) | 是一个Flutter官方出的插件，它的主要作用就是可以`key-value`的形式来进行APP可客户端的持久化。 |
+|                                                              |                                                              |
 
 学习参考项目
 

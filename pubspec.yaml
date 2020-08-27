@@ -36,6 +36,7 @@ dependencies:
   fluttertoast: ^7.0.2 # toast 轻提示插件
   fluro: ^1.6.3 # 路由插件
   flutter_html: ^1.0.2 # html插件不支持video和iframe
+  shared_preferences: ^0.5.1 # key-value形式的持久化插件
 
 dev_dependencies:
   flutter_test:
