@@ -5,6 +5,7 @@ import 'package:flutter_app/provider/cart.dart';
 import 'package:flutter_app/provider/category_goods_list.dart';
 import 'package:flutter_app/provider/child_category.dart';
 import 'package:flutter_app/provider/counter.dart';
+import 'package:flutter_app/provider/current_index.dart';
 import 'package:flutter_app/provider/details_info.dart';
 import 'package:flutter_app/routers/application.dart';
 import 'package:flutter_app/routers/routes.dart';
@@ -19,6 +20,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => CategoryGoodsListProvide()),
         ChangeNotifierProvider(create: (_) => DetailsInfoProvide()),
         ChangeNotifierProvider(create: (_) => CartProvider()),
+        ChangeNotifierProvider(create: (_) => CurrentIndexProvide()),
       ],
       child: MyApp(),
     ),

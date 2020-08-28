@@ -1,18 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_app/provider/current_index.dart';
+import 'package:flutter_screenutil/screenutil.dart';
+import 'package:provider/provider.dart';
 
 import 'cart_page.dart';
 import 'category_page.dart';
 import 'home_page.dart';
 import 'member_page.dart';
 
-class IndexPage extends StatefulWidget {
-  @override
-  _IndexPageState createState() => _IndexPageState();
-}
-
-class _IndexPageState extends State<IndexPage> {
+class IndexPage extends StatelessWidget {
   final List<BottomNavigationBarItem> bottomTabs = [
     BottomNavigationBarItem(
       icon: Icon(CupertinoIcons.home),
@@ -39,37 +36,28 @@ class _IndexPageState extends State<IndexPage> {
     MemberPage(),
   ];
 
-  int currentIndex = 0; // 索引，当前的选择
-  var currentPage; // 当前页面
-
-  @override
-  void initState() {
-    super.initState();
-    // 初始化默认选中的页面
-    currentPage = tabBodies[currentIndex];
-  }
-
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, width: 750, height: 1334, allowFontScaling: false);
-
-    return Scaffold(
-      backgroundColor: Color.fromRGBO(245, 245, 245, 1.0),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: currentIndex,
-        items: bottomTabs,
-        onTap: (index) {
-          setState(() {
-            currentIndex = index;
-            currentPage = tabBodies[currentIndex];
-          });
-        },
-      ),
-      body: IndexedStack(
-        index: currentIndex,
-        children: tabBodies,
-      ),
+    ScreenUtil.init(context, width: 750, height: 1334, allowFontScaling: true);
+    return Consumer<CurrentIndexProvide>(
+      builder: (context, t, child) {
+        int currentIndex = t.currentIndex;
+        return Scaffold(
+          backgroundColor: Color.fromRGBO(245, 245, 245, 1.0),
+          bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            currentIndex: currentIndex,
+            items: bottomTabs,
+            onTap: (index) {
+              t.changeIndex(index);
+            },
+          ),
+          body: IndexedStack(
+            index: currentIndex,
+            children: tabBodies,
+          ),
+        );
+      },
     );
   }
 }
