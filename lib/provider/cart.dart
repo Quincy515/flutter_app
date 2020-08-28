@@ -9,6 +9,7 @@ class CartProvider with ChangeNotifier {
   List<CartInfoModel> cartList = []; // 购物车列表
   double allPrice = 0; // 购物车商品总价格
   int allGoodsCount = 0; // 购物车商品总数
+  bool isAllCheck = true; // 是否全部选中
 
   save(goodsId, goodsName, count, price, images) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -77,10 +78,13 @@ class CartProvider with ChangeNotifier {
           .cast(); // 2. String 转为 List<Map>
       allPrice = 0; // 初始化商品总数量和总价格
       allGoodsCount = 0;
+      isAllCheck = true;
       tempList.forEach((element) {
         if (element['isCheck']) {
           allPrice += (element['count'] * element['price']);
           allGoodsCount += element['count'];
+        } else {
+          isAllCheck = false;
         }
         cartList.add(CartInfoModel.fromJson(element)); // 3. 进行循环转变为对象保存到数据模型
       });
@@ -107,5 +111,44 @@ class CartProvider with ChangeNotifier {
     cartString = json.encode(tempList).toString(); // List<Map>转成String
     prefs.setString('cartInfo', cartString); // 持久化
     await getCartInfo(); // 刷新列表
+  }
+
+  //修改选中状态
+  changeCheckState(CartInfoModel cartItem) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    cartString = prefs.getString('cartInfo'); // 1. 从持久化中获得字符串
+    List<Map> tempList = (json.decode(cartString.toString()) as List)
+        .cast(); // 2. String 转为 List<Map>
+    int tempIndex = 0; // 定义循环所需的索引
+    int changeIndex = 0; // 定义需要切换的索引
+    tempList.forEach((element) {
+      // dart在循环中不能修改循环项
+      if (element['goodsId'] == cartItem.goodsId) {
+        changeIndex = tempIndex; // 先确定索引值
+      }
+      tempIndex++;
+    });
+    tempList[changeIndex] = cartItem.toJson(); // 在外部修改
+    cartString = json.encode(tempList).toString();
+    prefs.setString('cartInfo', cartString);
+    await getCartInfo();
+  }
+
+  // 点击全选按钮操作
+  changeAllCheckBtnState(bool isCheck) async {
+    SharedPreferences prefs =
+        await SharedPreferences.getInstance(); //初始化SharedPreferences
+    cartString = prefs.getString('cartInfo'); // 1. 从持久化中获得字符串
+    List<Map> tempList = (json.decode(cartString.toString()) as List)
+        .cast(); // 2. String 转为 List<Map>
+    List<Map> newList = []; // 声明新的 List，因为在 Dart 循环中不允许修改循环项
+    for (var item in tempList) {
+      var newItem = item; // 把循环项赋值给新的 List
+      newItem['isCheck'] = isCheck; // 改变新的 List 中 isCheck 字段
+      newList.add(newItem); // 添加到新的 List 中
+    }
+    cartString = json.encode(newList).toString(); // 持久化变成字符串
+    prefs.setString('cartInfo', cartString);
+    await getCartInfo();
   }
 }
