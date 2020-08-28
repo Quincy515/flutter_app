@@ -151,4 +151,30 @@ class CartProvider with ChangeNotifier {
     prefs.setString('cartInfo', cartString);
     await getCartInfo();
   }
+
+  // 增加或减少数量的操作
+  addOrReduceAction(var cartItem, String todo) async {
+    SharedPreferences prefs =
+        await SharedPreferences.getInstance(); //初始化SharedPreferences
+    cartString = prefs.getString('cartInfo'); // 1. 从持久化中获得字符串
+    List<Map> tempList = (json.decode(cartString.toString()) as List)
+        .cast(); // 2. String 转为 List<Map>
+    int tempIndex = 0;
+    int changeIndex = 0;
+    tempList.forEach((element) {
+      if (element['goodsId'] == cartItem.goodsId) {
+        changeIndex = tempIndex; // 找到索引值
+      }
+      tempIndex++;
+    });
+    if (todo == 'add') {
+      cartItem.count++;
+    } else if (cartItem.count > 1) {
+      cartItem.count--;
+    }
+    tempList[changeIndex] = cartItem.toJson(); // 把 Json 变成 Map
+    cartString = json.encode(tempList).toString();
+    prefs.setString('cartInfo', cartString); // 持久化
+    await getCartInfo();
+  }
 }
