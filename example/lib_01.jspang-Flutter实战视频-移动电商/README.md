@@ -20,20 +20,17 @@ A new Flutter application.
 
 学习参考项目
 
-| 自学Flutter仿写的商城APP                        |      |
-| ----------------------------------------------- | ---- |
-| https://github.com/xiaoliudeHub/Flutter_shop    |      |
-| https://github.com/shenghy/flutter_shop         |      |
-| https://github.com/hemiahwu/flutter-jd-playlist |      |
-| https://github.com/ms-online/ms-flutter-jd      |      |
+| 自学Flutter仿写的商城APP                     |
+| -------------------------------------------- |
+| https://github.com/xiaoliudeHub/Flutter_shop |
+| https://github.com/shenghy/flutter_shop |
 
 学习文章搜集
 
-| 文章                                                         |
-| ------------------------------------------------------------ |
+| 文章                                        |
+| -------------------------------------------- |
 | [官方文档-简单的应用状态管理](https://book.flutterchina.club/chapter7/provider.html) |
 | [7.3 跨组件状态共享（Provider）](https://book.flutterchina.club/chapter7/provider.html) |
-| [flutter中的状态管理provider的详细使用(视频)](https://www.youtube.com/watch?v=rfAzMf_Z2Rs) |
 
 ## Getting Started
 
