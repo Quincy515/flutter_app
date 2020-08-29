@@ -28,6 +28,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
   dio: ^3.0.10 # 网络请求
+  dio_log: ^1.3.4 # 基于dio的网络请求日志
   flutter_swiper: ^1.1.6 # 轮播图
   flutter_screenutil: ^2.3.1 # 自适应屏幕
   url_launcher: ^5.5.0 # 打开网页、拨打电话、发送邮件
@@ -52,6 +53,9 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
+  assets:
+    - lib/assets/image/
+    - lib/assets/image/classify/
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

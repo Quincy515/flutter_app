@@ -16,7 +16,7 @@ A new Flutter application.
 | [flutter_webview_plugin](https://github.com/fluttercommunity/flutter_webview_plugin) | [webview_flutter](https://github.com/flutter/plugins/blob/master/packages/webview_flutter) 合并到官方 flutter plugins 中 |
 | [flutter_html](https://github.com/Sub6Resources/flutter_html) | `flutter_html`是一个可以解析静态html标签的Flutter Widget，现在支持超过70种不同的标签。不支持video和iframe |
 | [shared_preferences](https://github.com/flutter/plugins/tree/master/packages/shared_preferences) | 是一个Flutter官方出的插件，它的主要作用就是可以`key-value`的形式来进行APP可客户端的持久化 |
-|                                                              |                                                              |
+| [flutter_cached_network_image](https://github.com/Baseflow/flutter_cached_network_image) | 在 flutter 中下载、缓存和展示图片的插件                      |
 
 学习参考项目
 
@@ -33,7 +33,8 @@ A new Flutter application.
 | ------------------------------------------------------------ |
 | [官方文档-简单的应用状态管理](https://book.flutterchina.club/chapter7/provider.html) |
 | [7.3 跨组件状态共享（Provider）](https://book.flutterchina.club/chapter7/provider.html) |
-| [flutter中的状态管理provider的详细使用(视频)](https://www.youtube.com/watch?v=rfAzMf_Z2Rs) |
+| [flutter中的状态管理provider的详细使用(视频)](https://www.bilibili.com/video/BV1a7411L7dS) |
+| [flutter中的状态管理provider的详细使用(代码)](https://github.com/jiang111/flutter_code/tree/master/provider_movies) |
 
 ## Getting Started
 

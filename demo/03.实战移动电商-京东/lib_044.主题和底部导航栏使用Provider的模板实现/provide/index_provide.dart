@@ -9,8 +9,8 @@ List<SingleChildStatelessWidget> providers = [
   Provider<Api>(create: (_) => Api()),
   ChangeNotifierProvider<ThemeProvide>(
       create: (_) => ThemeProvide(
-            themeType: ThemeType.dark,
-            themeData: ThemeData.dark(),
+            themeType: ThemeType.light,
+            themeData: ThemeData.light(),
           )),
   ChangeNotifierProvider(create: (_) => BottomNaviProvide()),
 ];
