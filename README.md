@@ -17,15 +17,22 @@ A new Flutter application.
 | [flutter_html](https://github.com/Sub6Resources/flutter_html) | `flutter_html`是一个可以解析静态html标签的Flutter Widget，现在支持超过70种不同的标签。不支持video和iframe |
 | [shared_preferences](https://github.com/flutter/plugins/tree/master/packages/shared_preferences) | 是一个Flutter官方出的插件，它的主要作用就是可以`key-value`的形式来进行APP可客户端的持久化 |
 | [flutter_cached_network_image](https://github.com/Baseflow/flutter_cached_network_image) | 在 flutter 中下载、缓存和展示图片的插件                      |
+| [flutter_slidable](https://github.com/letsar/flutter_slidable) | 具有方向滑动动作的可滑动列表项的Flutter实现                  |
+| [Sky24n](https://github.com/Sky24n)/**[flustars](https://github.com/Sky24n/flustars)** | Flutter常用工具类库                                          |
 
 学习参考项目
 
-| 自学Flutter仿写的商城APP                        |      |
-| ----------------------------------------------- | ---- |
-| https://github.com/xiaoliudeHub/Flutter_shop    |      |
-| https://github.com/shenghy/flutter_shop         |      |
-| https://github.com/hemiahwu/flutter-jd-playlist |      |
-| https://github.com/ms-online/ms-flutter-jd      |      |
+| 自学Flutter仿写的商城APP                                     |                                            |
+| ------------------------------------------------------------ | ------------------------------------------ |
+|                                                              |                                            |
+| [shenghy](https://github.com/shenghy)/**[flutter_shop](https://github.com/shenghy/flutter_shop)**  [Flutter_shop](https://github.com/xiaoliudeHub/Flutter_shop) | Flutter的电商实战项目                      |
+|                                                              |                                            |
+| [ms-flutter-jd](https://github.com/ms-online/ms-flutter-jd)       [flutter-jd-playlist](https://github.com/hemiahwu/flutter-jd-playlist) | Flutter 仿京东商城                         |
+| [Sky24n](https://github.com/Sky24n)/[Fitness](https://github.com/Sky24n/Fitness) | Flutter 仿微博客户端（个人项目，暂未开源） |
+| [Sky24n](https://github.com/Sky24n)/[GreenTravel](https://github.com/Sky24n/GreenTravel) | Flutter 仿滴滴出行                         |
+|                                                              |                                            |
+|                                                              |                                            |
+|                                                              |                                            |
 
 学习文章搜集
 

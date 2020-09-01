@@ -32,7 +32,7 @@
 /build/
 
 # Web related
-lib/generated_plugin_registrant.dart
+example/lib_02.flutter-jd/flutter-jd/lib/generated_plugin_registrant.dart
 
 # Symbolication related
 app.*.symbols
