@@ -1,0 +1,35 @@
+{
+  "welcome": "welcome {name}",
+  "starterAppGenericTitle": "Title",
+  "@starterAppGenericTitle": {
+    "description": "Generic placeholder for title in app bar."
+  },
+  "starterAppTooltipShare": "Share",
+  "@starterAppTooltipShare": {
+    "description": "Tooltip on share icon."
+  },
+  "starterAppTooltipFavorite": "Favorite",
+  "@starterAppTooltipFavorite": {
+    "description": "Tooltip on favorite icon."
+  },
+  "starterAppTooltipSearch": "Search",
+  "@starterAppTooltipSearch": {
+    "description": "Tooltip on search icon."
+  },
+  "starterAppGenericHeadline": "Head",
+  "starterAppGenericSubtitle": "Subtitle",
+  "starterAppGenericBody": "body",
+  "starterAppTitle": "Starter app",
+  "@starterAppTitle": {
+    "description": "The title and name for the starter app."
+  },
+  "starterAppDrawerItem": "Item {value}",
+  "starterAppGenericButton": "BUTTON",
+  "@starterAppGenericButton": {
+    "description": "Generic placeholder for button."
+  },
+  "starterAppTooltipAdd": "Add",
+  "@starterAppTooltipAdd": {
+    "description": "Tooltip on add icon."
+  }
+}

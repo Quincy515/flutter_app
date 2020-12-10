@@ -1,0 +1,14 @@
+{
+  "welcome": "欢迎 {name}",
+  "starterAppGenericTitle": "标题",
+  "starterAppTooltipShare": "分享",
+  "starterAppTooltipFavorite": "收藏",
+  "starterAppTooltipSearch": "搜索",
+  "starterAppGenericHeadline": "标题",
+  "starterAppGenericSubtitle": "副标题",
+  "starterAppGenericBody": "正文",
+  "starterAppTitle": "入门应用",
+  "starterAppDrawerItem": "项 {value}",
+  "starterAppGenericButton": "按钮",
+  "starterAppTooltipAdd": "添加"
+}
