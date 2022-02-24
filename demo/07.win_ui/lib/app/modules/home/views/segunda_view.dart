@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
 
 class SegundaView extends GetView<HomeController> {
+  const SegundaView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
@@ -21,7 +23,7 @@ class SegundaView extends GetView<HomeController> {
                 ),
               ),
               SizedBox(height: 20),
-              const ContentD(),
+              ContentD(),
             ],
           )),
     );

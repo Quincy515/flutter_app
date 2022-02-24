@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
 
 class PrimeraView extends GetView<HomeController> {
+  const PrimeraView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
