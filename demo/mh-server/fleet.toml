@@ -1,0 +1,5 @@
+rd_enabled = true
+fleet_id = "53d50054-6fd6-40ae-b44c-7cd45819651a"
+
+[build]
+sccache = "C:\\Users\\Custer\\.cargo\\bin\\sccache.exe"

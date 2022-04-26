@@ -1,0 +1,20 @@
+[package]
+edition = "2021"
+name = "mh"
+version = "0.1.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-web = "4" 
+anyhow = "1" 
+axum = "0.5" 
+http = "0.2" 
+image = "0.24.1"
+reqwest = {version = "0.11", features = ["json"]}# HTTP 客户端    
+serde = {version = "1", features = ["derive"]} 
+tokio = {version = "1", features = ["full"]} 
+tower = {version = "0.4", features = ["util", "timeout", "load-shed", "limit"]}# 服务处理及中间件    
+tower-http = {version = "0.3", features = ["add-extension", "compression-full", "trace", "cors"]}# http 中间件    
+tracing = "0.1" # 日志和追踪
+tracing-subscriber = "0.3" # 日志和追踪
