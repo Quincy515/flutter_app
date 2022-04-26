@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
   var imgList = <Uint8List>[];
   void _incrementCounter() {
     setState(() {
-      page++;
+      page += 5;
     });
   }
 
@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ElevatedButton(
               onPressed: () {
-                dioGet();
+                dioGetMul();
               },
               child: const Text('开始'),
             ),
@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
               onPressed: () {
                 _incrementCounter();
-                dioGet();
+                dioGetMul();
               },
               child: const Text('下一页'),
             ),
@@ -99,13 +99,23 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void dioGet() async {
+  void dioGetMul() async {
+    await Future.wait([
+      dioGet(page),
+      dioGet(page + 1),
+      dioGet(page + 2),
+      dioGet(page + 3),
+      dioGet(page + 4)
+    ]);
+  }
+
+  Future dioGet(num) async {
     // https://github.com/flutterchina/dio#examples
     Response<List<int>> res = await Dio().post(
       'http://192.168.3.131:9527/img',
       data: {
         'url': url,
-        'page': page.toString(),
+        'page': num.toString(),
       },
       options: Options(responseType: ResponseType.bytes),
     );
