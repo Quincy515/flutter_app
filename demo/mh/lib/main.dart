@@ -109,10 +109,10 @@ class _MyHomePageState extends State<MyHomePage> {
     ]);
   }
 
-  Future dioGet(num) async {
+  Future dioGet(int num) async {
     // https://github.com/flutterchina/dio#examples
     Response<List<int>> res = await Dio().post(
-      'http://192.168.3.131:9527/img',
+      'http://111.229.226.15:9527/img',
       data: {
         'url': url,
         'page': num.toString(),
