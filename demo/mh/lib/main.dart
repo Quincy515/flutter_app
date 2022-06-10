@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     saveListWithGetStorage(
-        'history', ['https://nizhidaoma.bqulou.com/bookimages/18103/599427']);
+        'history', ['https://nizhidaoma.bqulou.com/bookimages/17107/79771']);
   }
 
   final box = GetStorage();
@@ -87,36 +87,24 @@ class _MyHomePageState extends State<MyHomePage> {
     List<Widget> imgListWidget = imgList.map((e) => Image.memory(e)).toList();
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
       ),
-      floatingActionButton: Container(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              IconButton(
-                onPressed: () => _scrollTo(where: 'top'),
-                tooltip: '回到顶部',
-                icon: const Icon(Icons.rocket),
-              ),
-              IconButton(
-                onPressed: () => _scrollTo(where: 'down'),
-                tooltip: '回到底部',
-                icon: const Icon(Icons.arrow_downward),
-              ),
-            ]),
-      ),
-
-      // FloatingActionButton(
-      //   elevation: 0,
-      //   backgroundColor: Colors.transparent,
-      //   onPressed: _scrollToTop,
-      //   tooltip: '回到顶部',
-      //   child: const Icon(
-      //     Icons.rocket,
-      //     color: Colors.lightBlueAccent,
-      //   ),
-      // ),
+      floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            IconButton(
+              onPressed: () => _scrollTo(where: 'top'),
+              tooltip: '回到顶部',
+              icon: const Icon(Icons.rocket),
+            ),
+            IconButton(
+              onPressed: () => _scrollTo(where: 'down'),
+              tooltip: '回到底部',
+              icon: const Icon(Icons.arrow_downward),
+            ),
+          ]),
       body: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
@@ -187,18 +175,19 @@ class _MyHomePageState extends State<MyHomePage> {
                         page = 1;
                         show = false;
                         imgList = <Uint8List>[];
+                        isLoading = false;
                       });
                     },
                     icon: const Icon(Icons.refresh),
                   ),
                 ],
               ),
-              isLoading ? isLoadingWidget() : const SizedBox(height: 20),
               show
                   ? Column(
                       children: [...imgListWidget],
                     )
                   : Container(),
+              isLoading ? isLoadingWidget() : const SizedBox(height: 20),
               IconButton(
                 onPressed: () {
                   _incrementCounter();
@@ -250,13 +239,11 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       isLoading = true;
     });
-    await Future.wait([
-      dioGet(page),
-      dioGet(page + 1),
-      dioGet(page + 2),
-      dioGet(page + 3),
-      dioGet(page + 4)
-    ]);
+    await dioGet(page);
+    await dioGet(page + 1);
+    await dioGet(page + 2);
+    await dioGet(page + 3);
+    await dioGet(page + 4);
     setState(() {
       isLoading = false;
     });
