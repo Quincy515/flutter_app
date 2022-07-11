@@ -86,7 +86,6 @@ class _MyHomePageState extends State<MyHomePage> {
     listPersons = persons.map((person) => Text(person.name)).toList();
   }
 
-  String path = '';
   void getDB() async {
     Directory directory = await getApplicationDocumentsDirectory();
     File databaseFile = File('${directory.path}/todos.db');
@@ -94,10 +93,8 @@ class _MyHomePageState extends State<MyHomePage> {
     if (!isExists) {
       await databaseFile.create();
     }
-    path = databaseFile.path;
-    debugPrint('======>data.db path: $path');
-
-    await api.connect(path: path);
+    debugPrint('======>data.db path: ${databaseFile.path}');
+    await api.connect(path: databaseFile.path);
   }
 
   @override
