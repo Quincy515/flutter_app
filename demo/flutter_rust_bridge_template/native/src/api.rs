@@ -85,9 +85,8 @@ pub struct Person {
 pub fn connect(path: String) -> Result<()> {
     // let conn = Connection::open_in_memory()?;
     let conn = Connection::open(path)?;
-    println!("====>sqlit: {}", conn.is_autocommit());
     conn.execute(
-        "CREATE TABLE persons (
+        "CREATE TABLE IF NOT EXISTS persons (
                 id INTEGER PRIMARY KEY,
                 name TEXT NOT NULL,
                 age INTEGER

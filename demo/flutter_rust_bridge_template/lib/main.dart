@@ -1,6 +1,9 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart' show join;
+import 'package:path_provider/path_provider.dart';
+
 import 'ffi.dart';
 
 void main() {
@@ -55,7 +58,6 @@ class _MyHomePageState extends State<MyHomePage> {
   // in the initState method.
   late Future<Platform> platform;
   late Future<bool> isRelease;
-  late Future<void> connect;
   int _counter = 2;
 
   void _incrementCounter() async {
@@ -86,15 +88,24 @@ class _MyHomePageState extends State<MyHomePage> {
 
   String path = '';
   void getDB() async {
-    path = join(await getDatabasesPath(), 'data.db');
+    Directory directory = await getApplicationDocumentsDirectory();
+    File databaseFile = File('${directory.path}/todos.db');
+    bool isExists = await databaseFile.exists();
+    if (!isExists) {
+      await databaseFile.create();
+    }
+    path = databaseFile.path;
+    debugPrint('======>data.db path: $path');
+
+    await api.connect(path: path);
   }
 
   @override
   void initState() {
     super.initState();
+    getDB();
     platform = api.platform();
     isRelease = api.rustReleaseMode();
-    connect = api.connect(path: path);
   }
 
   @override
@@ -143,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
             FutureBuilder<List<dynamic>>(
               // We await two unrelated futures here, so the type has to be
               // List<dynamic>.
-              future: Future.wait([platform, isRelease, connect]),
+              future: Future.wait([platform, isRelease]),
               builder: (context, snap) {
                 final style = Theme.of(context).textTheme.headline4;
                 if (snap.error != null) {
