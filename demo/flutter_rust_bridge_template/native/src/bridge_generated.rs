@@ -69,14 +69,17 @@ pub extern "C" fn wire_square(port_: i64, n: u32) {
 }
 
 #[no_mangle]
-pub extern "C" fn wire_connect(port_: i64) {
+pub extern "C" fn wire_connect(port_: i64, path: *mut wire_uint_8_list) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap(
         WrapInfo {
             debug_name: "connect",
             port: Some(port_),
             mode: FfiCallMode::Normal,
         },
-        move || move |task_callback| connect(),
+        move || {
+            let api_path = path.wire2api();
+            move |task_callback| connect(api_path)
+        },
     )
 }
 

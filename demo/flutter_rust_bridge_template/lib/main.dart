@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart' show join;
 import 'ffi.dart';
 
 void main() {
@@ -76,13 +78,15 @@ class _MyHomePageState extends State<MyHomePage> {
   late Person p;
   late List<Person> persons;
   List<Widget>? listPersons;
-  void _insertPerson() async {
-    p = await api.savePerson(name: 'Tom');
+  void _insertPerson(name) async {
+    p = await api.savePerson(name: name);
     persons = await api.listPersons();
-    listPersons = persons
-        .map((person) =>
-            Text(person.name, style: Theme.of(context).textTheme.headline4))
-        .toList();
+    listPersons = persons.map((person) => Text(person.name)).toList();
+  }
+
+  String path = '';
+  void getDB() async {
+    path = join(await getDatabasesPath(), 'data.db');
   }
 
   @override
@@ -90,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     platform = api.platform();
     isRelease = api.rustReleaseMode();
-    connect = api.connect();
+    connect = api.connect(path: path);
   }
 
   @override
@@ -196,9 +200,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     icon: const Icon(Icons.add),
                     onPressed: _incrementCounter,
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.person),
-                    onPressed: _insertPerson,
+                  TextField(
+                    onSubmitted: (val) {
+                      _insertPerson(val);
+                    },
                   ),
                 ],
               ),

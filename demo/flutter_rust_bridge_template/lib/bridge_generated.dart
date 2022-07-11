@@ -28,7 +28,7 @@ abstract class Native {
 
   FlutterRustBridgeTaskConstMeta get kSquareConstMeta;
 
-  Future<void> connect({dynamic hint});
+  Future<void> connect({required String path, dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kConnectConstMeta;
 
@@ -129,18 +129,19 @@ class NativeImpl extends FlutterRustBridgeBase<NativeWire> implements Native {
         argNames: ["n"],
       );
 
-  Future<void> connect({dynamic hint}) => executeNormal(FlutterRustBridgeTask(
-        callFfi: (port_) => inner.wire_connect(port_),
+  Future<void> connect({required String path, dynamic hint}) =>
+      executeNormal(FlutterRustBridgeTask(
+        callFfi: (port_) => inner.wire_connect(port_, _api2wire_String(path)),
         parseSuccessData: _wire2api_unit,
         constMeta: kConnectConstMeta,
-        argValues: [],
+        argValues: [path],
         hint: hint,
       ));
 
   FlutterRustBridgeTaskConstMeta get kConnectConstMeta =>
       const FlutterRustBridgeTaskConstMeta(
         debugName: "connect",
-        argNames: [],
+        argNames: ["path"],
       );
 
   Future<Person> savePerson({required String name, int? age, dynamic hint}) =>
@@ -345,15 +346,20 @@ class NativeWire implements FlutterRustBridgeWireBase {
 
   void wire_connect(
     int port_,
+    ffi.Pointer<wire_uint_8_list> path,
   ) {
     return _wire_connect(
       port_,
+      path,
     );
   }
 
-  late final _wire_connectPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64)>>('wire_connect');
-  late final _wire_connect = _wire_connectPtr.asFunction<void Function(int)>();
+  late final _wire_connectPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Int64, ffi.Pointer<wire_uint_8_list>)>>('wire_connect');
+  late final _wire_connect = _wire_connectPtr
+      .asFunction<void Function(int, ffi.Pointer<wire_uint_8_list>)>();
 
   void wire_save_person(
     int port_,

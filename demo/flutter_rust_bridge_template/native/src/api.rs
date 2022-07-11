@@ -82,9 +82,10 @@ pub struct Person {
     pub age: Option<i32>,
 }
 
-pub fn connect() -> Result<()> {
-    let conn = Connection::open_in_memory()?;
-
+pub fn connect(path: String) -> Result<()> {
+    // let conn = Connection::open_in_memory()?;
+    let conn = Connection::open(path)?;
+    println!("====>sqlit: {}", conn.is_autocommit());
     conn.execute(
         "CREATE TABLE persons (
                 id INTEGER PRIMARY KEY,
