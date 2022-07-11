@@ -53,6 +53,24 @@ class _MyHomePageState extends State<MyHomePage> {
   // in the initState method.
   late Future<Platform> platform;
   late Future<bool> isRelease;
+  int _counter = 2;
+
+  void _incrementCounter() async {
+    debugPrint('incrementCounter _counter： $_counter');
+    var n = await api.square(n: _counter);
+    debugPrint('incrementCounter n： $n');
+    setState(() {
+      _counter = n;
+    });
+  }
+
+  String greetText = '';
+  void greet() async {
+    var temp = await api.greet();
+    setState(() {
+      greetText = temp;
+    });
+  }
 
   @override
   void initState() {
@@ -63,6 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    greet();
     // This method is rerun every time setState is called.
     //
     // The Flutter framework has been optimized to make rerunning build methods
@@ -139,7 +158,26 @@ class _MyHomePageState extends State<MyHomePage> {
                     'Unknown OS';
                 return Text('$text ($release)', style: style);
               },
-            )
+            ),
+            Row(
+              children: [
+                Text(
+                  greetText,
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+                Text(
+                  '$_counter',
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+              ],
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: IconButton(
+                icon: const Icon(Icons.add),
+                onPressed: _incrementCounter,
+              ),
+            ),
           ],
         ),
       ),

@@ -19,6 +19,14 @@ abstract class Native {
   Future<bool> rustReleaseMode({dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kRustReleaseModeConstMeta;
+
+  Future<String> greet({dynamic hint});
+
+  FlutterRustBridgeTaskConstMeta get kGreetConstMeta;
+
+  Future<int> square({required int n, dynamic hint});
+
+  FlutterRustBridgeTaskConstMeta get kSquareConstMeta;
 }
 
 enum Platform {
@@ -68,13 +76,49 @@ class NativeImpl extends FlutterRustBridgeBase<NativeWire> implements Native {
         argNames: [],
       );
 
+  Future<String> greet({dynamic hint}) => executeNormal(FlutterRustBridgeTask(
+        callFfi: (port_) => inner.wire_greet(port_),
+        parseSuccessData: _wire2api_String,
+        constMeta: kGreetConstMeta,
+        argValues: [],
+        hint: hint,
+      ));
+
+  FlutterRustBridgeTaskConstMeta get kGreetConstMeta =>
+      const FlutterRustBridgeTaskConstMeta(
+        debugName: "greet",
+        argNames: [],
+      );
+
+  Future<int> square({required int n, dynamic hint}) =>
+      executeNormal(FlutterRustBridgeTask(
+        callFfi: (port_) => inner.wire_square(port_, _api2wire_u32(n)),
+        parseSuccessData: _wire2api_u32,
+        constMeta: kSquareConstMeta,
+        argValues: [n],
+        hint: hint,
+      ));
+
+  FlutterRustBridgeTaskConstMeta get kSquareConstMeta =>
+      const FlutterRustBridgeTaskConstMeta(
+        debugName: "square",
+        argNames: ["n"],
+      );
+
   // Section: api2wire
+  int _api2wire_u32(int raw) {
+    return raw;
+  }
 
   // Section: api_fill_to_wire
 
 }
 
 // Section: wire2api
+String _wire2api_String(dynamic raw) {
+  return raw as String;
+}
+
 bool _wire2api_bool(dynamic raw) {
   return raw as bool;
 }
@@ -85,6 +129,18 @@ int _wire2api_i32(dynamic raw) {
 
 Platform _wire2api_platform(dynamic raw) {
   return Platform.values[raw];
+}
+
+int _wire2api_u32(dynamic raw) {
+  return raw as int;
+}
+
+int _wire2api_u8(dynamic raw) {
+  return raw as int;
+}
+
+Uint8List _wire2api_uint_8_list(dynamic raw) {
+  return raw as Uint8List;
 }
 
 // ignore_for_file: camel_case_types, non_constant_identifier_names, avoid_positional_boolean_parameters, annotate_overrides, constant_identifier_names
@@ -136,6 +192,34 @@ class NativeWire implements FlutterRustBridgeWireBase {
           'wire_rust_release_mode');
   late final _wire_rust_release_mode =
       _wire_rust_release_modePtr.asFunction<void Function(int)>();
+
+  void wire_greet(
+    int port_,
+  ) {
+    return _wire_greet(
+      port_,
+    );
+  }
+
+  late final _wire_greetPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64)>>('wire_greet');
+  late final _wire_greet = _wire_greetPtr.asFunction<void Function(int)>();
+
+  void wire_square(
+    int port_,
+    int n,
+  ) {
+    return _wire_square(
+      port_,
+      n,
+    );
+  }
+
+  late final _wire_squarePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Uint32)>>(
+          'wire_square');
+  late final _wire_square =
+      _wire_squarePtr.asFunction<void Function(int, int)>();
 
   void free_WireSyncReturnStruct(
     WireSyncReturnStruct val,

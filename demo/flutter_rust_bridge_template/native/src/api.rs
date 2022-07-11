@@ -57,3 +57,11 @@ pub fn platform() -> Platform {
 pub fn rust_release_mode() -> bool {
     cfg!(not(debug_assertions))
 }
+
+pub fn greet() -> String {
+    "Hello from Rust! 🦀".into()
+}
+
+pub fn square(n: u32) -> u32 {
+    n * 2
+}

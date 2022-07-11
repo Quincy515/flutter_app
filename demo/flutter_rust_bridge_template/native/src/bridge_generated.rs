@@ -41,6 +41,33 @@ pub extern "C" fn wire_rust_release_mode(port_: i64) {
     )
 }
 
+#[no_mangle]
+pub extern "C" fn wire_greet(port_: i64) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap(
+        WrapInfo {
+            debug_name: "greet",
+            port: Some(port_),
+            mode: FfiCallMode::Normal,
+        },
+        move || move |task_callback| Ok(greet()),
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn wire_square(port_: i64, n: u32) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap(
+        WrapInfo {
+            debug_name: "square",
+            port: Some(port_),
+            mode: FfiCallMode::Normal,
+        },
+        move || {
+            let api_n = n.wire2api();
+            move |task_callback| Ok(square(api_n))
+        },
+    )
+}
+
 // Section: wire structs
 
 // Section: wrapper structs
@@ -65,6 +92,12 @@ where
         } else {
             Some(self.wire2api())
         }
+    }
+}
+
+impl Wire2Api<u32> for u32 {
+    fn wire2api(self) -> u32 {
+        self
     }
 }
 
@@ -97,6 +130,7 @@ impl support::IntoDart for Platform {
         .into_dart()
     }
 }
+
 // Section: executor
 
 support::lazy_static! {
