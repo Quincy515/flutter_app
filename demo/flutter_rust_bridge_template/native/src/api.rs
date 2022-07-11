@@ -65,3 +65,67 @@ pub fn greet() -> String {
 pub fn square(n: u32) -> u32 {
     n * 2
 }
+
+use anyhow::Result;
+use lazy_static::lazy_static;
+use rusqlite::{params, Connection};
+use std::sync::Mutex;
+
+lazy_static! {
+    static ref CONN: Mutex<Option<Connection>> = Mutex::new(None);
+}
+
+#[derive(Debug)]
+pub struct Person {
+    pub id: i32,
+    pub name: String,
+    pub age: Option<i32>,
+}
+
+pub fn connect() -> Result<()> {
+    let conn = Connection::open_in_memory()?;
+
+    conn.execute(
+        "CREATE TABLE persons (
+                id INTEGER PRIMARY KEY,
+                name TEXT NOT NULL,
+                age INTEGER
+        )",
+        [],
+    )?;
+
+    *CONN.lock().unwrap() = Some(conn);
+    Ok(())
+}
+
+pub fn save_person(name: String, age: Option<i32>) -> Result<Person> {
+    let c = CONN.lock().unwrap();
+    let conn = c.as_ref();
+    conn.expect("Connection to exist").execute(
+        "INSERT INTO persons (name, age) VALUES (?1, ?2)",
+        params![&name, &age],
+    )?;
+    Ok(Person {
+        id: conn.unwrap().last_insert_rowid() as i32,
+        name,
+        age,
+    })
+}
+
+pub fn list_persons() -> Result<Vec<Person>> {
+    let c = CONN.lock().unwrap();
+    let conn = c.as_ref();
+    let mut stmt = conn
+        .expect("Connection to exist")
+        .prepare("SELECT id, name, age FROM persons")?;
+    let person_iter = stmt.query_map([], |row| {
+        Ok(Person {
+            id: row.get(0)?,
+            name: row.get(1)?,
+            age: row.get(2)?,
+        })
+    })?;
+
+    let persons = person_iter.map(|p| p.unwrap()).collect();
+    Ok(persons)
+}

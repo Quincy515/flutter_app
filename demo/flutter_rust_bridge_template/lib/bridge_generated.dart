@@ -27,6 +27,30 @@ abstract class Native {
   Future<int> square({required int n, dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kSquareConstMeta;
+
+  Future<void> connect({dynamic hint});
+
+  FlutterRustBridgeTaskConstMeta get kConnectConstMeta;
+
+  Future<Person> savePerson({required String name, int? age, dynamic hint});
+
+  FlutterRustBridgeTaskConstMeta get kSavePersonConstMeta;
+
+  Future<List<Person>> listPersons({dynamic hint});
+
+  FlutterRustBridgeTaskConstMeta get kListPersonsConstMeta;
+}
+
+class Person {
+  final int id;
+  final String name;
+  final int? age;
+
+  Person({
+    required this.id,
+    required this.name,
+    this.age,
+  });
 }
 
 enum Platform {
@@ -105,9 +129,80 @@ class NativeImpl extends FlutterRustBridgeBase<NativeWire> implements Native {
         argNames: ["n"],
       );
 
+  Future<void> connect({dynamic hint}) => executeNormal(FlutterRustBridgeTask(
+        callFfi: (port_) => inner.wire_connect(port_),
+        parseSuccessData: _wire2api_unit,
+        constMeta: kConnectConstMeta,
+        argValues: [],
+        hint: hint,
+      ));
+
+  FlutterRustBridgeTaskConstMeta get kConnectConstMeta =>
+      const FlutterRustBridgeTaskConstMeta(
+        debugName: "connect",
+        argNames: [],
+      );
+
+  Future<Person> savePerson({required String name, int? age, dynamic hint}) =>
+      executeNormal(FlutterRustBridgeTask(
+        callFfi: (port_) => inner.wire_save_person(
+            port_, _api2wire_String(name), _api2wire_opt_box_autoadd_i32(age)),
+        parseSuccessData: _wire2api_person,
+        constMeta: kSavePersonConstMeta,
+        argValues: [name, age],
+        hint: hint,
+      ));
+
+  FlutterRustBridgeTaskConstMeta get kSavePersonConstMeta =>
+      const FlutterRustBridgeTaskConstMeta(
+        debugName: "save_person",
+        argNames: ["name", "age"],
+      );
+
+  Future<List<Person>> listPersons({dynamic hint}) =>
+      executeNormal(FlutterRustBridgeTask(
+        callFfi: (port_) => inner.wire_list_persons(port_),
+        parseSuccessData: _wire2api_list_person,
+        constMeta: kListPersonsConstMeta,
+        argValues: [],
+        hint: hint,
+      ));
+
+  FlutterRustBridgeTaskConstMeta get kListPersonsConstMeta =>
+      const FlutterRustBridgeTaskConstMeta(
+        debugName: "list_persons",
+        argNames: [],
+      );
+
   // Section: api2wire
+  ffi.Pointer<wire_uint_8_list> _api2wire_String(String raw) {
+    return _api2wire_uint_8_list(utf8.encoder.convert(raw));
+  }
+
+  ffi.Pointer<ffi.Int32> _api2wire_box_autoadd_i32(int raw) {
+    return inner.new_box_autoadd_i32_0(_api2wire_i32(raw));
+  }
+
+  int _api2wire_i32(int raw) {
+    return raw;
+  }
+
+  ffi.Pointer<ffi.Int32> _api2wire_opt_box_autoadd_i32(int? raw) {
+    return raw == null ? ffi.nullptr : _api2wire_box_autoadd_i32(raw);
+  }
+
   int _api2wire_u32(int raw) {
     return raw;
+  }
+
+  int _api2wire_u8(int raw) {
+    return raw;
+  }
+
+  ffi.Pointer<wire_uint_8_list> _api2wire_uint_8_list(Uint8List raw) {
+    final ans = inner.new_uint_8_list_0(raw.length);
+    ans.ref.ptr.asTypedList(raw.length).setAll(0, raw);
+    return ans;
   }
 
   // Section: api_fill_to_wire
@@ -123,8 +218,31 @@ bool _wire2api_bool(dynamic raw) {
   return raw as bool;
 }
 
+int _wire2api_box_autoadd_i32(dynamic raw) {
+  return raw as int;
+}
+
 int _wire2api_i32(dynamic raw) {
   return raw as int;
+}
+
+List<Person> _wire2api_list_person(dynamic raw) {
+  return (raw as List<dynamic>).map(_wire2api_person).toList();
+}
+
+int? _wire2api_opt_box_autoadd_i32(dynamic raw) {
+  return raw == null ? null : _wire2api_box_autoadd_i32(raw);
+}
+
+Person _wire2api_person(dynamic raw) {
+  final arr = raw as List<dynamic>;
+  if (arr.length != 3)
+    throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+  return Person(
+    id: _wire2api_i32(arr[0]),
+    name: _wire2api_String(arr[1]),
+    age: _wire2api_opt_box_autoadd_i32(arr[2]),
+  );
 }
 
 Platform _wire2api_platform(dynamic raw) {
@@ -141,6 +259,10 @@ int _wire2api_u8(dynamic raw) {
 
 Uint8List _wire2api_uint_8_list(dynamic raw) {
   return raw as Uint8List;
+}
+
+void _wire2api_unit(dynamic raw) {
+  return;
 }
 
 // ignore_for_file: camel_case_types, non_constant_identifier_names, avoid_positional_boolean_parameters, annotate_overrides, constant_identifier_names
@@ -221,6 +343,81 @@ class NativeWire implements FlutterRustBridgeWireBase {
   late final _wire_square =
       _wire_squarePtr.asFunction<void Function(int, int)>();
 
+  void wire_connect(
+    int port_,
+  ) {
+    return _wire_connect(
+      port_,
+    );
+  }
+
+  late final _wire_connectPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64)>>('wire_connect');
+  late final _wire_connect = _wire_connectPtr.asFunction<void Function(int)>();
+
+  void wire_save_person(
+    int port_,
+    ffi.Pointer<wire_uint_8_list> name,
+    ffi.Pointer<ffi.Int32> age,
+  ) {
+    return _wire_save_person(
+      port_,
+      name,
+      age,
+    );
+  }
+
+  late final _wire_save_personPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Int64, ffi.Pointer<wire_uint_8_list>,
+              ffi.Pointer<ffi.Int32>)>>('wire_save_person');
+  late final _wire_save_person = _wire_save_personPtr.asFunction<
+      void Function(
+          int, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<ffi.Int32>)>();
+
+  void wire_list_persons(
+    int port_,
+  ) {
+    return _wire_list_persons(
+      port_,
+    );
+  }
+
+  late final _wire_list_personsPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64)>>(
+          'wire_list_persons');
+  late final _wire_list_persons =
+      _wire_list_personsPtr.asFunction<void Function(int)>();
+
+  ffi.Pointer<ffi.Int32> new_box_autoadd_i32_0(
+    int value,
+  ) {
+    return _new_box_autoadd_i32_0(
+      value,
+    );
+  }
+
+  late final _new_box_autoadd_i32_0Ptr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Int32> Function(ffi.Int32)>>(
+          'new_box_autoadd_i32_0');
+  late final _new_box_autoadd_i32_0 = _new_box_autoadd_i32_0Ptr
+      .asFunction<ffi.Pointer<ffi.Int32> Function(int)>();
+
+  ffi.Pointer<wire_uint_8_list> new_uint_8_list_0(
+    int len,
+  ) {
+    return _new_uint_8_list_0(
+      len,
+    );
+  }
+
+  late final _new_uint_8_list_0Ptr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<wire_uint_8_list> Function(
+              ffi.Int32)>>('new_uint_8_list_0');
+  late final _new_uint_8_list_0 = _new_uint_8_list_0Ptr
+      .asFunction<ffi.Pointer<wire_uint_8_list> Function(int)>();
+
   void free_WireSyncReturnStruct(
     WireSyncReturnStruct val,
   ) {
@@ -248,6 +445,13 @@ class NativeWire implements FlutterRustBridgeWireBase {
           'store_dart_post_cobject');
   late final _store_dart_post_cobject = _store_dart_post_cobjectPtr
       .asFunction<void Function(DartPostCObjectFnType)>();
+}
+
+class wire_uint_8_list extends ffi.Struct {
+  external ffi.Pointer<ffi.Uint8> ptr;
+
+  @ffi.Int32()
+  external int len;
 }
 
 typedef DartPostCObjectFnType = ffi.Pointer<

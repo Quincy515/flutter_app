@@ -53,6 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // in the initState method.
   late Future<Platform> platform;
   late Future<bool> isRelease;
+  late Future<void> connect;
   int _counter = 2;
 
   void _incrementCounter() async {
@@ -72,11 +73,24 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  late Person p;
+  late List<Person> persons;
+  List<Widget>? listPersons;
+  void _insertPerson() async {
+    p = await api.savePerson(name: 'Tom');
+    persons = await api.listPersons();
+    listPersons = persons
+        .map((person) =>
+            Text(person.name, style: Theme.of(context).textTheme.headline4))
+        .toList();
+  }
+
   @override
   void initState() {
     super.initState();
     platform = api.platform();
     isRelease = api.rustReleaseMode();
+    connect = api.connect();
   }
 
   @override
@@ -125,7 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
             FutureBuilder<List<dynamic>>(
               // We await two unrelated futures here, so the type has to be
               // List<dynamic>.
-              future: Future.wait([platform, isRelease]),
+              future: Future.wait([platform, isRelease, connect]),
               builder: (context, snap) {
                 final style = Theme.of(context).textTheme.headline4;
                 if (snap.error != null) {
@@ -171,11 +185,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
+            Column(
+              children: listPersons ?? [],
+            ),
             Align(
               alignment: Alignment.bottomRight,
-              child: IconButton(
-                icon: const Icon(Icons.add),
-                onPressed: _incrementCounter,
+              child: Column(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.add),
+                    onPressed: _incrementCounter,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.person),
+                    onPressed: _insertPerson,
+                  ),
+                ],
               ),
             ),
           ],

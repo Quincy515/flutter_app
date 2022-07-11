@@ -68,13 +68,74 @@ pub extern "C" fn wire_square(port_: i64, n: u32) {
     )
 }
 
+#[no_mangle]
+pub extern "C" fn wire_connect(port_: i64) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap(
+        WrapInfo {
+            debug_name: "connect",
+            port: Some(port_),
+            mode: FfiCallMode::Normal,
+        },
+        move || move |task_callback| connect(),
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn wire_save_person(port_: i64, name: *mut wire_uint_8_list, age: *mut i32) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap(
+        WrapInfo {
+            debug_name: "save_person",
+            port: Some(port_),
+            mode: FfiCallMode::Normal,
+        },
+        move || {
+            let api_name = name.wire2api();
+            let api_age = age.wire2api();
+            move |task_callback| save_person(api_name, api_age)
+        },
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn wire_list_persons(port_: i64) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap(
+        WrapInfo {
+            debug_name: "list_persons",
+            port: Some(port_),
+            mode: FfiCallMode::Normal,
+        },
+        move || move |task_callback| list_persons(),
+    )
+}
+
 // Section: wire structs
+
+#[repr(C)]
+#[derive(Clone)]
+pub struct wire_uint_8_list {
+    ptr: *mut u8,
+    len: i32,
+}
 
 // Section: wrapper structs
 
 // Section: static checks
 
 // Section: allocate functions
+
+#[no_mangle]
+pub extern "C" fn new_box_autoadd_i32_0(value: i32) -> *mut i32 {
+    support::new_leak_box_ptr(value)
+}
+
+#[no_mangle]
+pub extern "C" fn new_uint_8_list_0(len: i32) -> *mut wire_uint_8_list {
+    let ans = wire_uint_8_list {
+        ptr: support::new_leak_vec_ptr(Default::default(), len),
+        len,
+    };
+    support::new_leak_box_ptr(ans)
+}
 
 // Section: impl Wire2Api
 
@@ -95,9 +156,43 @@ where
     }
 }
 
+impl Wire2Api<String> for *mut wire_uint_8_list {
+    fn wire2api(self) -> String {
+        let vec: Vec<u8> = self.wire2api();
+        String::from_utf8_lossy(&vec).into_owned()
+    }
+}
+
+impl Wire2Api<i32> for *mut i32 {
+    fn wire2api(self) -> i32 {
+        unsafe { *support::box_from_leak_ptr(self) }
+    }
+}
+
+impl Wire2Api<i32> for i32 {
+    fn wire2api(self) -> i32 {
+        self
+    }
+}
+
 impl Wire2Api<u32> for u32 {
     fn wire2api(self) -> u32 {
         self
+    }
+}
+
+impl Wire2Api<u8> for u8 {
+    fn wire2api(self) -> u8 {
+        self
+    }
+}
+
+impl Wire2Api<Vec<u8>> for *mut wire_uint_8_list {
+    fn wire2api(self) -> Vec<u8> {
+        unsafe {
+            let wrap = support::box_from_leak_ptr(self);
+            support::vec_from_leak_ptr(wrap.ptr, wrap.len)
+        }
     }
 }
 
@@ -114,6 +209,18 @@ impl<T> NewWithNullPtr for *mut T {
 }
 
 // Section: impl IntoDart
+
+impl support::IntoDart for Person {
+    fn into_dart(self) -> support::DartCObject {
+        vec![
+            self.id.into_dart(),
+            self.name.into_dart(),
+            self.age.into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl support::IntoDartExceptPrimitive for Person {}
 
 impl support::IntoDart for Platform {
     fn into_dart(self) -> support::DartCObject {
