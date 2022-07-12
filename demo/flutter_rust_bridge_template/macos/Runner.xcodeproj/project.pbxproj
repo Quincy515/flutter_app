@@ -27,7 +27,6 @@
 		33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F42044A3C60003C045 /* MainMenu.xib */; };
 		33CC11132044BFA00003C045 /* MainFlutterWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CC11122044BFA00003C045 /* MainFlutterWindow.swift */; };
 		72651EDE287D8FD300E01D16 /* native.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 72651EB0287D882600E01D16 /* native.dylib */; };
-		DDB91831C4E5626811142C98 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1231B33BD19A7AB1D8DA664 /* Pods_Runner.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,7 +104,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				72651EDE287D8FD300E01D16 /* native.dylib in Frameworks */,
-				DDB91831C4E5626811142C98 /* Pods_Runner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
