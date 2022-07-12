@@ -28,7 +28,7 @@ to learn how to write and use binding code.
 2. https://github.com/nickming/FRTodo
 3. https://app.yinxiang.com/fx/2b1e41a1-d099-4a87-8a6b-8d5794303377
 
-# 步骤
+# Android 步骤
 
 首先从 [flutter_rust_bridge_template](https://github.com/Desdaemon/flutter_rust_bridge_template) 模板开始，注意因为模版代码可能更新不及时，需要把 `pubspec.yaml` 中的 `flutter_rust_bridge: ` 更新至最新版本，可以避免一些问题。
 
@@ -55,7 +55,7 @@ ANDROID_SDK_HOME 路径通常在以下目录:
 接下来，你需要让这个 NDK 对 Gradle 可见。通常可以在 ~/ 中添加 `gradle.properties`
 
 ```shell
-echo "ANDROID_NDK=%APPDATA%/Library/Android/sdk/ndk/22.1.7171670" >> ~/.gradle/gradle.properties
+echo "ANDROID_NDK=~/Library/Android/sdk/ndk/22.1.7171670" >> ~/.gradle/gradle.properties
 ```
 
 4. cargo-ndk
@@ -97,3 +97,62 @@ flutter_rust_bridge_codegen \
 
 8. 到这里应该就可以正常开发
 
+# IOS 步骤
+
+1. IOS setup
+
+iOS requires some additional Rust targets for cross-compilation:
+
+```bash
+# 64 bit targets (real device & simulator):
+rustup target add aarch64-apple-ios x86_64-apple-ios
+# New simulator target for Xcode 12 and later
+rustup target add aarch64-apple-ios-sim
+# 32 bit targets (you probably don't need these):
+rustup target add armv7-apple-ios i386-apple-ios
+```
+
+2. 注意 `Cargo.toml` 中
+
+```toml
+[lib]
+crate-type = ["lib", "cdylib", "staticlib"]
+```
+
+where
+
+- `lib` is required for non-library targets, such as tests and benchmarks
+- `staticlib` is required for iOS
+- `cdylib` for all other platforms
+
+3. Running the codegen
+
+```bash
+flutter_rust_bridge_codegen \
+    -r $crate/src/api.rs \
+    -d lib/bridge_generated.dart \
+    -c ios/Runner/bridge_generated.h \
+    -c macos/Runner/bridge_generated.h   # if building for MacOS
+```
+
+4. Linking the project
+
+在 Xcode 中打开 `ios/Runner.xcodeproj`。注意在模版代码中 Runner 子目录中已经有了 `native`
+
+![ios_proj_tree](http://cjycode.com/flutter_rust_bridge/integrate/ios_proj_tree.png)
+
+这里可以把他删除，替换成我们自己的 `$crate/$crate.xcodeproj`。如果没有该文件，可以手动生成。
+
+```bash
+cargo xcode
+```
+
+点击最上方的 `Runner`，然后点击右侧的 **Build Phases** tab. 首先添加 **Dependencies** phase, 注意 **$crate-staticlib** for iOS,  **$crate-cdylib** for MacOS.
+
+![ios_dep_phase](http://cjycode.com/flutter_rust_bridge/integrate/ios_dep_phase.png)
+
+然后添加 **Link Binary With Libraries** phase,  **lib$crate_static.a** for iOS,  **$crate.dylib** for MacOS.
+
+![ios_link_phase](http://cjycode.com/flutter_rust_bridge/integrate/ios_link_phase.png)
+
+5. 到这里就可以正常运行了
