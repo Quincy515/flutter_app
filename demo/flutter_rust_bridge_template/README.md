@@ -137,22 +137,26 @@ flutter_rust_bridge_codegen \
 
 4. Linking the project
 
-在 Xcode 中打开 `ios/Runner.xcodeproj`。注意在模版代码中 Runner 子目录中已经有了 `native`
+在 Xcode 中打开 `ios/Runner.xcodeproj`。在模版代码中 Runner 子目录中有 `native`
 
 ![ios_proj_tree](http://cjycode.com/flutter_rust_bridge/integrate/ios_proj_tree.png)
 
-这里可以把他删除，替换成我们自己的 `$crate/$crate.xcodeproj`。如果没有该文件，可以手动生成。
+注意在 Runner 根目录下有一个 `$crate/$crate.xcodeproj` 这里可以把他删除。如果 `Runner` 子目录下没有 `native` ，可以在 `Rust` `crate` 的 `native` 目录下手动生成。
 
 ```bash
 cargo xcode
 ```
 
-点击最上方的 `Runner`，然后点击右侧的 **Build Phases** tab. 首先添加 **Dependencies** phase, 注意 **$crate-staticlib** for iOS,  **$crate-cdylib** for MacOS.
+点击最上方的 `Runner`，然后点击右侧的 **Build Phases** tab. 首先添加 **Dependencies**, 注意 **$crate-staticlib** for iOS,  **$crate-cdylib** for MacOS.
 
 ![ios_dep_phase](http://cjycode.com/flutter_rust_bridge/integrate/ios_dep_phase.png)
 
-然后添加 **Link Binary With Libraries** phase,  **lib$crate_static.a** for iOS,  **$crate.dylib** for MacOS.
+然后添加 **Link Binary With Libraries**,  **lib$crate_static.a** for iOS,  **$crate.dylib** for MacOS.
 
 ![ios_link_phase](http://cjycode.com/flutter_rust_bridge/integrate/ios_link_phase.png)
 
-5. 到这里就可以正常运行了
+5. 到这里就可以了，注意点击`ios/Runner.xcworkspace` 打开 Xcode 进行运行
+
+> **Note**: 如果碰到了 [Module 'path_provider' not found](https://stackoverflow.com/questions/64258476/module-path-provider-not-found) 问题，可以把 ios 目录下文件 Podfile 中
+>
+> `# platform :ios, '9.0'` 修改为 `platform :ios, '11.0'`
