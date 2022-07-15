@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "61640974177",
+    "project_id": "mlkit-plugin-flutter",
+    "storage_bucket": "mlkit-plugin-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:61640974177:android:8ba547b0e99b0ac7da6f20",
+        "android_client_info": {
+          "package_name": "com.example.flutter_rust_bridge_template"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "61640974177-hkujrlesep0ce7qsj7hneko6prok7l81.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6Ba6wXFWeoaFnV_FklVxpEdaW72wSpOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "61640974177-hkujrlesep0ce7qsj7hneko6prok7l81.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "61640974177-2t2bcnmm76ui5b8j60855iqvhnb869in.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "fun.custer.frbTest1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
