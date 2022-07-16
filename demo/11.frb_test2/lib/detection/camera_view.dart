@@ -29,7 +29,7 @@ class CameraView extends StatefulWidget {
   final CameraLensDirection initialDirection;
 
   @override
-  _CameraViewState createState() => _CameraViewState();
+  State<StatefulWidget> createState() => _CameraViewState();
 }
 
 class _CameraViewState extends State<CameraView> {

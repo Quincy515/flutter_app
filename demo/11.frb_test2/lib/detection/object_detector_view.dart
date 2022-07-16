@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mlkit_object_detection/google_mlkit_object_detection.dart';
+// ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -14,7 +15,7 @@ class ObjectDetectorView extends StatefulWidget {
   const ObjectDetectorView({Key? key}) : super(key: key);
 
   @override
-  _ObjectDetectorView createState() => _ObjectDetectorView();
+  State<StatefulWidget> createState() => _ObjectDetectorView();
 }
 
 class _ObjectDetectorView extends State<ObjectDetectorView> {
@@ -55,7 +56,7 @@ class _ObjectDetectorView extends State<ObjectDetectorView> {
   void _onScreenModeChanged(ScreenMode mode) {
     switch (mode) {
       case ScreenMode.gallery:
-        // _initializeDetector(DetectionMode.single);
+        _initializeDetector(DetectionMode.single);
         return;
 
       case ScreenMode.liveFeed:
