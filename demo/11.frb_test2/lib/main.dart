@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
+import 'detection/detection.dart';
 import 'detection/object_detector_view.dart';
 import 'detection/pose_detection_view.dart';
 
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ObjectDetectorView(),
+      home: const CustomDetectorView(),
     );
   }
 }
