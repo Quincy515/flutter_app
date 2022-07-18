@@ -87,3 +87,73 @@ import FirebaseCore
 如果使用了 Firebase 的相关功能，需要在这里导入，如果没有只需要导入  `import FirebaseCore` 。
 
 到这里就可以正常使用了。
+
+## Android 添加 Firebase 配置文件
+
+1. **下载 google-services.json** 以获取 Firebase Android 配置文件 (`google-services.json`)。
+
+2. 将配置文件移到应用的模块（应用级）目录中 （通常为 `app` 目录）
+
+3. 如需在应用中启用 Firebase 产品，请将 [google-services 插件](https://developers.google.com/android/guides/google-services-plugin)添加到 Gradle 文件中。
+
+   1. 在根级（项目级）Gradle 文件 (`build.gradle`) 中添加规则，以纳入 Google 服务 Gradle 插件。此外，请确认您拥有 Google 的 Maven 代码库。
+
+   ```build.gradle
+   buildscript {
+   
+     repositories {
+       // Check that you have the following line (if not, add it):
+       google()  // Google's Maven repository
+     }
+   
+     dependencies {
+       // ...
+   
+       // Add the following line:
+       classpath 'com.google.gms:google-services:4.3.12'  // Google Services plugin
+     }
+   }
+   
+   allprojects {
+     // ...
+   
+     repositories {
+       // Check that you have the following line (if not, add it):
+       google()  // Google's Maven repository
+       // ...
+     }
+   }
+   ```
+
+   1. 在您的模块（应用级）Gradle 文件（通常是 `app/build.gradle`）中，应用 Google 服务 Gradle 插件：
+
+```build.gradle
+apply plugin: 'com.android.application'
+// Add the following line:
+apply plugin: 'com.google.gms.google-services'  // Google Services plugin
+
+android {
+  // ...
+}
+```
+
+## Android 将 Firebase SDK 添加到您的应用
+
+使用 [Firebase Android BoM](https://firebase.google.com/docs/android/learn-more#bom) 声明您要在应用中使用的 [Firebase 产品](https://firebase.google.com/docs/android/setup#available-libraries)的依赖项。在**模块（应用级）Gradle 文件**（通常为 `app/build.gradle`）中声明这些依赖项。[未启用 Analytics](https://firebase.google.com/docs/android/setup#未启用-analytics-android)
+
+```build.gradle
+dependencies {
+  // ...
+
+  // Import the Firebase BoM
+  implementation platform('com.google.firebase:firebase-bom:30.1.0')
+
+  // When using the BoM, you don't specify versions in Firebase library dependencies
+
+  // Declare the dependencies for the desired Firebase products
+  // For example, declare the dependencies for Firebase Authentication and Cloud Firestore
+  implementation 'com.google.firebase:firebase-auth-ktx'
+  implementation 'com.google.firebase:firebase-firestore-ktx'
+}
+```
+
