@@ -8,6 +8,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   cupertino_icons: ^1.0.2
   flutter_rust_bridge: ^1.41.2
   fluent_ui: ^4.0.0-pre.3
@@ -15,6 +17,26 @@ dependencies:
   ffi: ^2.0.1
   file_picker: ^5.0.1
   flutter_quill: ^5.4.1
+  auto_size_text: 3.0.0
+  cached_network_image: 3.2.1
+  chewie: 1.3.4
+  expandable: 5.0.1
+  flutter_spinkit: 5.1.0
+  font_awesome_flutter: 10.1.0
+  go_router: 3.1.0
+  google_fonts: 3.0.1
+  intl: 0.17.0
+  json_path: 0.4.1
+  page_transition: 2.0.9
+  shared_preferences: 2.0.15
+  smooth_page_indicator: 1.0.0+2
+  timeago: 3.2.2
+  url_launcher: 6.1.5
+  video_player: 2.4.5
+  video_player_android: 2.3.8
+  video_player_avfoundation: 2.3.5
+  video_player_platform_interface: 5.1.3
+  video_player_web: 2.0.12
 
 dev_dependencies:
   ffigen: ^6.1.2
@@ -24,3 +46,11 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/fonts/
+    - assets/images/
+    - assets/videos/
+    - assets/audios/
+    - assets/lottie_animations/
+    - assets/rive_animations/
+    - assets/pdfs/

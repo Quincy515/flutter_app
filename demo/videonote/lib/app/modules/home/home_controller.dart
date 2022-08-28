@@ -9,6 +9,8 @@ class HomeController extends GetxController {
   QuillController quillController = QuillController.basic();
   late Platform platform;
   late bool isRelease;
+  final showIsWarp = true.obs;
+  final dropDownValue = '根目录'.obs;
 
   TextEditingController videoTextController = TextEditingController();
 
@@ -34,4 +36,6 @@ class HomeController extends GetxController {
   }
 
   void increment() => count.value++;
+  void setShowIsWarp(val) => showIsWarp.value = val;
+  void setDropDownValue(val) => dropDownValue.value = val;
 }
