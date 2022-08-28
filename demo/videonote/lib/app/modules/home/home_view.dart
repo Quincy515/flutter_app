@@ -372,24 +372,7 @@ class HomeView extends GetView<HomeController> {
                                             12, 12, 12, 12),
                                         child: InkWell(
                                           onTap: () async {
-                                            context.pushNamed(
-                                              'HomePage',
-                                              queryParams: {
-                                                'videoPath': serializeParam(
-                                                    'https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4',
-                                                    ParamType.String),
-                                              }.withoutNulls,
-                                              extra: <String, dynamic>{
-                                                kTransitionInfoKey:
-                                                TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                  PageTransitionType.fade,
-                                                  duration:
-                                                  Duration(milliseconds: 0),
-                                                ),
-                                              },
-                                            );
+                                            await Get.toNamed('/note');
                                           },
                                           child: Column(
                                             mainAxisSize: MainAxisSize.max,

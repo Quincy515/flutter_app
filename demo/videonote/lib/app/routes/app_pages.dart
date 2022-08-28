@@ -4,6 +4,8 @@ import '../modules/home/home_binding.dart';
 import '../modules/home/home_view.dart';
 import '../modules/info/info_binding.dart';
 import '../modules/info/info_view.dart';
+import '../modules/note/note_binding.dart';
+import '../modules/note/note_view.dart';
 
 // ignore_for_file: constant_identifier_names
 
@@ -24,6 +26,11 @@ class AppPages {
       name: _Paths.INFO,
       page: () => const InfoView(),
       binding: InfoBinding(),
+    ),
+    GetPage(
+      name: _Paths.NOTE,
+      page: () => const NoteView(),
+      binding: NoteBinding(),
     ),
   ];
 }
