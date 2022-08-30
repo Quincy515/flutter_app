@@ -9,12 +9,6 @@ class NoteView extends GetView<NoteController> {
   const NoteView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('NoteView'),
-        centerTitle: true,
-      ),
-      body: WebNoteWidget(),
-    );
+    return WebNoteWidget();
   }
 }
