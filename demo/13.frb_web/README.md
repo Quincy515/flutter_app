@@ -22,3 +22,26 @@ echo "ANDROID_NDK=.." >> ~/.gradle/gradle.properties
 Then go ahead and run `flutter run`! When you're ready, refer to our documentation
 [here](https://fzyzcjy.github.io/flutter_rust_bridge/index.html)
 to learn how to write and use binding code.
+
+## Web setup
+Building on web requires nightly Rust, the wasm32-unknown-unknown target and wasm-pack, which can be installed using these commands:
+
+```
+rustup toolchain install nightly
+rustup +nightly component add rust-src
+rustup +nightly target add wasm32-unknown-unknown
+# either of these
+curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+cargo install wasm-pack
+```
+Optionally (but highly recommended), install flutter_rust_bridge_serve to expedite the process of building the WASM binary and setting up HTTP headers:
+
+```
+# in your Flutter/Dart package
+flutter pub add flutter_rust_bridge
+# then run this instead of "flutter web -d chrome"
+dart run flutter_rust_bridge:serve
+# or install globally
+dart pub global activate flutter_rust_bridge
+flutter_rust_bridge_serve
+```
