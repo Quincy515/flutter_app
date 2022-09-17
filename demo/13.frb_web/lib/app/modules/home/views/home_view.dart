@@ -24,7 +24,12 @@ class HomeView extends GetView<HomeController> {
                 onPressed: () async {
                   await Get.toNamed('/info');
                 },
-                child: const Text('info'))
+                child: const Text('info')),
+            ElevatedButton(
+                onPressed: () async {
+                  await Get.toNamed('/dashboard');
+                },
+                child: const Text('dashboard'))
           ],
         ),
       ),
