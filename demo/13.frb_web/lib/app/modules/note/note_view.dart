@@ -27,22 +27,16 @@ class _NoteViewState extends State<NoteView> {
   Widget build(BuildContext context) {
     return ScaffoldPage.scrollable(
       key: scaffoldKey,
-      children: [
+      children: const [
         Card(
-          child: Wrap(
-            spacing: 10.0,
-            runSpacing: 10.0,
-            children: const [
-              HiVideoPlayer(
-                path: 'https://oxyak.oss-cn-hangzhou.aliyuncs.com/1.mp4',
-                videoType: VideoType.network,
-                autoPlay: false,
-                looping: true,
-                showControls: true,
-                allowFullScreen: true,
-                allowPlaybackSpeedMenu: true,
-              ),
-            ],
+          child: HiVideoPlayer(
+            path: 'https://oxyak.oss-cn-hangzhou.aliyuncs.com/1.mp4',
+            videoType: VideoType.network,
+            autoPlay: false,
+            looping: true,
+            showControls: true,
+            allowFullScreen: true,
+            allowPlaybackSpeedMenu: true,
           ),
         ),
       ],
