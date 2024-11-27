@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:start_code/pages/basic/basic_page.dart';
-import 'package:start_code/widgets/custom_button.dart';
+
+import 'pages/auto_dispose/auto_dispose_page.dart';
+import 'pages/basic/basic_page.dart';
+import 'widgets/custom_button.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -41,6 +43,10 @@ class MyHomePage extends StatelessWidget {
           children: [
             Text('Provider'),
             CustomButton(title: 'Provider', child: BasicPage()),
+            CustomButton(
+              title: 'AutoDisposeProvider',
+              child: AutoDisposePage(),
+            ),
             Divider(),
           ],
         ),
