@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:start_code/pages/auto_dispose_family/auto_dispose_family_page.dart';
+import 'package:start_code/pages/auto_dispose_family_multipe_params/auto_dispose_family_multipe_params_page.dart';
+import 'package:start_code/pages/family/family_page.dart';
 
 import 'pages/auto_dispose/auto_dispose_page.dart';
 import 'pages/basic/basic_page.dart';
@@ -44,9 +47,14 @@ class MyHomePage extends StatelessWidget {
             Text('Provider'),
             CustomButton(title: 'Provider', child: BasicPage()),
             CustomButton(
-              title: 'AutoDisposeProvider',
-              child: AutoDisposePage(),
-            ),
+                title: 'AutoDisposeProvider', child: AutoDisposePage()),
+            CustomButton(title: 'FamilyProvider', child: FamilyPage()),
+            CustomButton(
+                title: 'AutoDisposeFamilyProvider',
+                child: AutoDisposeFamilyPage()),
+            CustomButton(
+                title: 'AutoDisposeFamilyMultiParamsProvider',
+                child: AutoDisposeFamilyTestPage()),
             Divider(),
           ],
         ),
