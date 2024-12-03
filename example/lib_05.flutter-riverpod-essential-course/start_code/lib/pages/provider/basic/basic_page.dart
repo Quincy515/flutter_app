@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:start_code/pages/basic/basic_provider.dart';
+import 'package:start_code/pages/provider/basic/basic_provider.dart';
 
 class BasicPage extends ConsumerStatefulWidget {
   const BasicPage({super.key});

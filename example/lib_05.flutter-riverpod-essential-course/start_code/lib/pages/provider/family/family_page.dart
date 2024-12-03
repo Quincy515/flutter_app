@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:start_code/pages/auto_dispose_family/auto_dispose_family_provider.dart';
+import 'package:start_code/pages/provider/family/family_provider.dart';
 
-class AutoDisposeFamilyPage extends ConsumerWidget {
-  const AutoDisposeFamilyPage({super.key});
+class FamilyPage extends ConsumerWidget {
+  const FamilyPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final helloJohn = ref.watch(autoDisposeFamilyHelloProvider('john'));
-    final helloJane = ref.watch(autoDisposeFamilyHelloProvider('john'));
+    final helloJohn = ref.watch(familyHelloProvider('john'));
+    final helloJane = ref.watch(familyHelloProvider('jane'));
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('AutoDisposeFamilyProvider'),
+        title: const Text('FamilyProvider'),
       ),
       body: Center(
         child: Column(
