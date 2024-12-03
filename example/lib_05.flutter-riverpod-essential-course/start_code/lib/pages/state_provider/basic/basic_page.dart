@@ -23,15 +23,15 @@ class StateBasicPage extends ConsumerWidget {
 
     final value = ref.watch(counterProvider);
 
-    if (value == 3) {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              content: Text('counter: $value'),
-            );
-          });
-    }
+    // if (value == 3) {
+    //   showDialog(
+    //       context: context,
+    //       builder: (context) {
+    //         return AlertDialog(
+    //           content: Text('counter: $value'),
+    //         );
+    //       });
+    // }
 
     return Scaffold(
       appBar: AppBar(
