@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FamilyPage extends ConsumerWidget {
-  const FamilyPage({super.key});
+class StateFamilyPage extends ConsumerWidget {
+  const StateFamilyPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

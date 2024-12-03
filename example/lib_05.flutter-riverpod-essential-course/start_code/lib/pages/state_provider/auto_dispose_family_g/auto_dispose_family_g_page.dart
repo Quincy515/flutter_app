@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AutoDisposeFamilyPage extends ConsumerWidget {
-  const AutoDisposeFamilyPage({super.key});
+class StateAutoDisposeFamilyGPage extends ConsumerWidget {
+  const StateAutoDisposeFamilyGPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
