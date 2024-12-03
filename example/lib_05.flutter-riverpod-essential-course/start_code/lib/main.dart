@@ -6,9 +6,17 @@ import 'package:start_code/pages/provider/auto_dispose_family_multipe_params/aut
 import 'package:start_code/pages/provider/basic_code_generation/basic_code_generation_page.dart';
 import 'package:start_code/pages/provider/family/family_page.dart';
 import 'package:start_code/pages/provider/family_g/family_g_page.dart';
+import 'package:start_code/pages/state_provider/basic_g/basic_g_page.dart';
 
 import 'pages/provider/auto_dispose/auto_dispose_page.dart';
 import 'pages/provider/basic/basic_page.dart';
+import 'pages/state_provider/auto_dispose/auto_dispose_page.dart';
+import 'pages/state_provider/auto_dispose_family/auto_dispose_family_page.dart';
+import 'pages/state_provider/auto_dispose_family_test/auto_dispose_family_test_page.dart';
+import 'pages/state_provider/auto_dispose_g/auto_dispose_g_page.dart';
+import 'pages/state_provider/basic/basic_page.dart';
+import 'pages/state_provider/family/family_page.dart';
+import 'pages/state_provider/family_g/family_g_page.dart';
 import 'widgets/custom_button.dart';
 
 void main() {
@@ -67,6 +75,26 @@ class MyHomePage extends StatelessWidget {
                 child: AutoDisposeGPage()),
             CustomButton(
                 title: 'FamilyProviderGenerator', child: FamilyGPage()),
+            Divider(),
+            Text('State_Provider'),
+            CustomButton(title: 'Provider', child: StateBasicPage()),
+            CustomButton(
+                title: 'AutoDisposeProvider', child: StateAutoDisposePage()),
+            CustomButton(title: 'FamilyProvider', child: StateFamilyPage()),
+            CustomButton(
+                title: 'AutoDisposeFamilyProvider',
+                child: StateAutoDisposeFamilyPage()),
+            CustomButton(
+                title: 'AutoDisposeFamilyMultiParamsProvider',
+                child: StateAutoDisposeFamilyTestPage()),
+            Divider(),
+            Text('State_Provider Generator'),
+            CustomButton(title: 'ProviderGenerator', child: StateBasicGPage()),
+            CustomButton(
+                title: 'AutoDisposeProviderGenerator',
+                child: StateAutoDisposeGPage()),
+            CustomButton(
+                title: 'FamilyProviderGenerator', child: StateFamilyGPage()),
             Divider(),
           ],
         ),
