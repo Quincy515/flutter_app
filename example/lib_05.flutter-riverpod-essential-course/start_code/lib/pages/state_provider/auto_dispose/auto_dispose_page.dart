@@ -18,7 +18,12 @@ class StateAutoDisposePage extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          ref.read(autoDisposeCounterProvider.notifier).state++;
+          // ref.read(autoDisposeCounterProvider.notifier).state++;
+          // ref.read(autoDisposeCounterProvider.notifier).state =
+          //     ref.read(autoDisposeCounterProvider.notifier).state + 10;
+          ref
+              .read(autoDisposeCounterProvider.notifier)
+              .update((state) => state + 10);
         },
         child: const Icon(Icons.add),
       ),

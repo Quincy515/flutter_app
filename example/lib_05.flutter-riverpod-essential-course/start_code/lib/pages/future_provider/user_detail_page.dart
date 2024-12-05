@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class StateAutoDisposeFamilyTestPage extends ConsumerWidget {
-  const StateAutoDisposeFamilyTestPage({super.key});
+class UserDetailPage extends ConsumerWidget {
+  const UserDetailPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('AutoDisposeFamilyStateProvider'),
+        title: const Text('User Detail'),
       ),
       body: const Center(
-        child: Text('AutoDisposeFamilyStateProvider'),
+        child: Text('User Detail'),
       ),
     );
   }

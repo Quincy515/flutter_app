@@ -13,14 +13,16 @@ class StateAutoDisposeGPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('AutoDisposeStateProvider'),
+        title: const Text('AutoDisposeStateGProvider'),
       ),
       body: Center(
         child: Text(value, style: Theme.of(context).textTheme.headlineLarge),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          ref.read(autoDisposeCounterProvider.notifier).state++;
+          ref
+              .read(autoDisposeCounterProvider.notifier)
+              .update((state) => state + 10);
         },
         child: const Icon(Icons.add),
       ),
