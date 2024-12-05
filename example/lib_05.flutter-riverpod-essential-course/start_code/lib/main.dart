@@ -8,6 +8,7 @@ import 'package:start_code/pages/provider/family/family_page.dart';
 import 'package:start_code/pages/provider/family_g/family_g_page.dart';
 import 'package:start_code/pages/state_provider/basic_g/basic_g_page.dart';
 
+import 'pages/future_provider/user_list_page.dart';
 import 'pages/provider/auto_dispose/auto_dispose_page.dart';
 import 'pages/provider/basic/basic_page.dart';
 import 'pages/state_provider/auto_dispose/auto_dispose_page.dart';
@@ -88,6 +89,8 @@ class MyHomePage extends StatelessWidget {
             CustomButton(
                 title: 'FamilyProviderGenerator', child: StateFamilyGPage()),
             Divider(),
+            Text('Future_Provider'),
+            CustomButton(title: 'UserListPage', child: UserListPage()),
           ],
         ),
       ),

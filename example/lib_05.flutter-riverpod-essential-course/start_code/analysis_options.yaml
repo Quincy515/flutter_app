@@ -6,7 +6,10 @@ linter:
     prefer_single_quotes: true
 
 analyzer:
+  errors:
+    # invalid_annotation_target: false
   plugins:
     - custom_lint
   exclude:
     - "**/*.g.dart"
+    - "**/*.freezed.dart"
