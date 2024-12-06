@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:start_code/pages/models/user.dart';
-import 'package:start_code/providers/dio_provider.dart';
+import 'package:start_code/pages/future_provider/models/user.dart';
+import 'package:start_code/pages/future_provider/providers/dio_provider.dart';
 
 // 快捷键 futureProvider 生成 provider
 final userListProvider = FutureProvider.autoDispose<List<User>>((ref) async {
