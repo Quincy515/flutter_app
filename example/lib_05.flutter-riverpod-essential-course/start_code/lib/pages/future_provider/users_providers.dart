@@ -14,3 +14,14 @@ final userListProvider = FutureProvider.autoDispose<List<User>>((ref) async {
   final users = [for (final user in userList) User.fromJson(user)];
   return users;
 });
+
+final userDetailProvider =
+    FutureProvider.autoDispose.family<User, int>((ref, id) async {
+  print('[userDetailProvider($id)] created');
+  ref.onDispose(() {
+    print('[userDetailProvider($id)] disposed');
+  });
+  final response = await ref.watch(dioProvider).get('/users/$id');
+  final user = User.fromJson(response.data);
+  return user;
+});
